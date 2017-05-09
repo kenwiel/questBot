@@ -14,16 +14,22 @@ See !!help for commands
 1. Create a mentionable role
 2. Create the quest
   !!addQuest [@role] [@qm] ["quest name"] ["quest title"] <"quest description">
+  
   Users can now !!join or !!leave the role
+  
   When the role is mentioned, the bot will link to the latest thread on /qst/ with "quest title" in the subject field
 
 Some commands contain "special symbols"
+
 When [Square Brackets] surround an argument then that means the argument is mandatory for the command to work.
+
 When \<Pointed Brackets\> surround an argument, then that means the argument is optional.
 
 ## Example
 Create the role @TutorialQuest and make it mentionable
+
 !!addQuest @TutorialQuest @TutorialUser "Tutorial Quest" "Tutorial" "In Tutorial quest, you learn how to use the questBot!"
+
 !!join @TutorialQuest
 
 `@TutorialQuest`
