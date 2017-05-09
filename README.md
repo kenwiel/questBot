@@ -28,11 +28,11 @@ Create the role @TutorialQuest and make it mentionable
 
 `@TutorialQuest`  
 `questBot: TutorialQuest #1: link.to/thread`  
-
-
-
-
-
-
-
+  
+  
+  
+  
+  
+  
+  
 questBot is untested when running on multiple servers. If problems arise it is possible that I will disable the bot until it is compatible with multiple servers.
