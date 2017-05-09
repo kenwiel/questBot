@@ -1,13 +1,14 @@
 # questBot
-
 A Discord Bot for the managing of quests on 4chans /qst/ board
 
-Discord Server: https://discordapp.com/invite/USPFgKa
+Main Discord Server: [!qtg](https://discordapp.com/invite/USPFgKa)
 
 See !!help for commands
 
-Uses edited JavaCh: https://github.com/camelKaiser/JavaCh
+##Add the bot to your server:
+https://discordapp.com/api/oauth2/authorize?client_id=302172063270174720&scope=bot&permissions=0
 
-Uses Javacord: https://github.com/BtoBastian/Javacord
-
-Uses Sdcf4j: https://github.com/BtoBastian/sdcf4j
+##Other projects used:
+* [JavaCh](https://github.com/camelKaiser/JavaCh) (edited)
+* [Javacord](https://github.com/BtoBastian/Javacord)
+* [Sdcf4j](https://github.com/BtoBastian/sdcf4j)
