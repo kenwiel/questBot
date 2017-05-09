@@ -20,6 +20,7 @@ See !!help for commands
 Some commands contain "special symbols"  
 When [Square Brackets] surround an argument then that means the argument is mandatory for the command to work.  
 When \<Pointed Brackets\> surround an argument, then that means the argument is optional.  
+When a star (\[arg\]\*) follows after an argument, then that means the command can take any amount of arguments of this kind
 
 ## Example
 Create the role @TutorialQuest and make it mentionable  
