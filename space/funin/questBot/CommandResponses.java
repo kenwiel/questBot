@@ -8,4 +8,13 @@ public class CommandResponses {
 	public static String errorNull = "Target is null.";
 	public static String errorTimeout = "Operation took too long.";
 	public static String errorInvalidRole = "Operation on that role not possible.";
+	
+	public static String[] mentionResponses = {
+			"I love you, too.",
+			"qt",
+			":^)",
+			"¯\\_(ツ)_/¯",
+			"ayy lmao",
+			"no u"
+	};
 }
