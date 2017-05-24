@@ -15,6 +15,7 @@ public class CommandResponses {
 			":^)",
 			"¯\\_(ツ)_/¯",
 			"ayy lmao",
-			"no u"
+			"no u",
+			"Blame Pink"
 	};
 }
