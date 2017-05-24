@@ -117,6 +117,7 @@ public class CommandResponses {
 			" This is bait ",
 			"Children should not be on the internet",
 			"Just crack open a cold one with the boys",
-			"Respect women"
+			"Respect women",
+			"SteveXPink"
 	};
 }
