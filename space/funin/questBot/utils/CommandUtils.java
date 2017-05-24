@@ -62,7 +62,7 @@ public class CommandUtils {
     	
     	for(Role r : userRoles) {
     		rolePermissions = r.getPermissions();
-    		if(rolePermissions.getState(PermissionType.ADMINISTATOR).equals(PermissionState.ALLOWED))
+    		if(rolePermissions.getState(PermissionType.ADMINISTRATOR).equals(PermissionState.ALLOWED))
     			return true;
     		if(rolePermissions.getState(PermissionType.MANAGE_SERVER).equals(PermissionState.ALLOWED))
     			return true;
