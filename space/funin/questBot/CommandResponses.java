@@ -68,7 +68,7 @@ public class CommandResponses {
 			"You're gunna want to see this!",
 			"2012 was the best time for memes.",
 			"I am the danger.",
-			"Hey kid, want some drugs?,
+			"Hey kid, want some drugs?",
 			"DUES VULT",
 			"Praise kek",
 			"Check 'em!",
