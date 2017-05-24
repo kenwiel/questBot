@@ -123,7 +123,7 @@ public class CommandResponses {
 			"Fucking Ess the moralfag",
 			"Wow it's fucking nothing",
 			"We should totally turn on crits",
-			"Moon is not a furry"
+			"Moon is not a furry",
 			"Moon is a furry",
 			"I want to rape a pokemon",
 			"Kayaba is a faggot",
