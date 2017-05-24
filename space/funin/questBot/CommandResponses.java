@@ -148,6 +148,22 @@ public class CommandResponses {
 			">Not having evolved dildo pouches",
 			"Star you Scotshit",
 			"I wonder who could be behind this post...",
-			"Fucking dirtniggers rolling around in the mud. Sky master race."
+			"Fucking dirtniggers rolling around in the mud. Sky master race.",
+			"SUCCUBUS STATUS: REMOVED",
+			"GLOB GLOB MOTHERFUCKERS"
+			"Is it really a blue dress you're seeing?",
+			"triggered",
+			"We are hitting autism levels that shouldn't even be possible.",
+			"NEVER GONNA GIVE YOU UP",
+			"NEVER GONNA LET YOU DOWN",
+			"NEVER GONNA RUN AROUND",
+			"AND DESERT YOU",
+			"Fucking normies, I swear to god",
+			"Wait, Purps is a loli?",
+			"Why you always lying?",
+			"JUST DO IT",
+			"Yo, you looking fresh as shit right now, but I got one question. WHAT ARE THOOOOOSE",
+			"I don't talk to filthy Fleshbags, beep.",
+			"Fucking airniggers."
 	};
 }
