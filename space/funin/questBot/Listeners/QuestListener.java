@@ -85,7 +85,7 @@ public class QuestListener implements CommandExecutor {
         return "!!newQuest : " + CommandResponses.errorArgMention;
     }
     
-    @Command(aliases = { "!!ranks", "!!roles", "!!getPairs", "!!getPair", "!!get", "!!pair", "!!pairs" },
+    @Command(aliases = { "!!ranks", "!!roles", "!!getPairs", "!!getPair", "!!get", "!!pair", "!!pairs", "!!quests", "!!q" },
             description = "Outputs a list of ranks and their corresponding quests", usage = "!!ranks", async = true)
     public void onGetPairCommand(String[] args, User user, Channel channel, Server server) {
         boolean isEmbed = CommandUtils.isEmbed(args);
