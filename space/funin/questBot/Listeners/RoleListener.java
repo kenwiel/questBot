@@ -55,7 +55,7 @@ public class RoleListener implements CommandExecutor {
         
         for(Role r : mentions) {
         	if(Settings.getMap().containsKey(r.getId()) && user.getRoles(server).contains(r)) {
-        		r.removeUser(user);
+        		r.removeUser(user).get();
                 channel.sendMessage("!!leave: Removed role " + r.getMentionTag());
             } else {
                 channel.sendMessage("!!leave: " + r.getMentionTag() + " : " + CommandResponses.errorInvalidRole);

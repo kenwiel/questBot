@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringEscapeUtils;
 
 import de.btobastian.javacord.DiscordAPI;
 import de.btobastian.javacord.entities.Channel;
+import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
@@ -28,6 +29,10 @@ public class MentionListener implements MessageCreateListener {
     
     public void onMessageCreate(DiscordAPI api, Message message) {
     	Channel channel = message.getChannelReceiver();
+    	User user = message.getAuthor();
+    	
+    	if(user.equals(api.getYourself()))
+    		return;
     	
         //only check messages that contain a group mention and DONT start with a bot command
         if (message.getContent().contains("<@&") && !message.getContent().startsWith("!!")) {
@@ -102,4 +107,5 @@ public class MentionListener implements MessageCreateListener {
 		}
 		return thread;
 	}
+
 }
