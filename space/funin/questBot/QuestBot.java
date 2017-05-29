@@ -39,12 +39,9 @@ public class QuestBot {
 		qst = new specBoard(false, "qst");
 		connect(Settings.loadToken());
 		Settings.reload();
+		api.setWaitForServersOnStartup(false);
+		api.setAutoReconnect(true);
 		
-		
-		
-		// update the qst cache every 2 minutes
-		executor.scheduleAtFixedRate(new RunnableCatalogFetcher(), 0, 120, TimeUnit.SECONDS);
-
 		api.connect(new FutureCallback<DiscordAPI>() {
 			@Override
 			public void onSuccess(final DiscordAPI api) {
@@ -75,6 +72,10 @@ public class QuestBot {
 				t.printStackTrace();
 			}
 		});
+		
+		// update the qst cache every 2 minutes
+		executor.scheduleAtFixedRate(new RunnableCatalogFetcher(), 0, 120, TimeUnit.SECONDS);
+
 	}
 
 	private static void connect(String token) {
