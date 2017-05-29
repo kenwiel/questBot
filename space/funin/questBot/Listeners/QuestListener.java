@@ -32,7 +32,7 @@ public class QuestListener implements CommandExecutor {
     private static Logger logger = LoggerFactory.getLogger(QuestListener.class);
     
     @Command(aliases = { "!!newQuest", "!!new", "!!addQuest", "!!add" }, description = "Creates a new Quest.",
-            usage = "!!newQuest [@role] [@qm] [\"quest name\"] [\"quest title\"] <\"quest description\">",
+            usage = "!!newQuest [@role] [@qm] [\"quest name\"] [\"search string\"] <\"quest description\">",
             async = true)
     public String onCreateQuestCommand(String[] args, Channel channel, Message message, Server server, DiscordAPI api)
             throws InterruptedException, ExecutionException {
