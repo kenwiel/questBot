@@ -3,6 +3,7 @@
 	<name>questBot</name>
 	<comment></comment>
 	<projects>
+		<project>javacord</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

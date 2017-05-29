@@ -150,7 +150,8 @@ public class CommandResponses {
 			"I wonder who could be behind this post...",
 			"Fucking dirtniggers rolling around in the mud. Sky master race.",
 			"SUCCUBUS STATUS: REMOVED",
-			"GLOB GLOB MOTHERFUCKERS"
+			"GLOB GLOB MOTHERFUCKERS",
+			"GLOP GLOP",
 			"Is it really a blue dress you're seeing?",
 			"triggered",
 			"We are hitting autism levels that shouldn't even be possible.",
