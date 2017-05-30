@@ -26,58 +26,28 @@ public class HelpListener implements CommandExecutor {
 	@Command(aliases = { "!!help", "!!h", "!!info",
 			"!!i" }, description = "Shows all available commands", usage = "!!help", async = true)
 	public void onHelpCommand(String[] args, User user, Channel channel) {
-		boolean isEmbed = CommandUtils.isEmbed(args);
-		if (!isEmbed) {
-			System.out.println("in");
-			EmbedBuilder eb = new EmbedBuilder();
-			eb.setColor(Color.CYAN);
-			for (CommandHandler.SimpleCommand simpleCommand : commandHandler.getCommands()) {
+		System.out.println("in");
+		EmbedBuilder eb = new EmbedBuilder();
+		eb.setColor(Color.CYAN);
+		for (CommandHandler.SimpleCommand simpleCommand : commandHandler.getCommands()) {
 
-				String usage = simpleCommand.getCommandAnnotation().usage();
-				if (usage.isEmpty()) { // no usage provided, using the first
-										// alias
-					usage = simpleCommand.getCommandAnnotation().aliases()[0];
-				}
-
-				String description = simpleCommand.getCommandAnnotation().description();
-				if (description.isEmpty()) {
-					description = "No description provided";
-				}
-				System.out.println(usage);
-				System.out.println(description);
-				eb.addField(usage, description, false);
+			String usage = simpleCommand.getCommandAnnotation().usage();
+			if (usage.isEmpty()) { // no usage provided, using the first
+									// alias
+				usage = simpleCommand.getCommandAnnotation().aliases()[0];
 			}
-			eb.addField("*", "Multiple arguments of this kind are possible", false);
-			channel.sendMessage("", eb);
 
-		} else {
-			StringBuilder builder = new StringBuilder();
-			builder.append("```xml"); // a xml code block looks fancy
-			for (CommandHandler.SimpleCommand simpleCommand : commandHandler.getCommands()) {
-				if (!simpleCommand.getCommandAnnotation().showInHelpPage()) {
-					continue; // skip command
-				}
-				builder.append("\n");
-				if (!simpleCommand.getCommandAnnotation().requiresMention()) {
-					// the default prefix only works if the command does not
-					// require
-					// a mention
-					builder.append(commandHandler.getDefaultPrefix());
-				}
-				String usage = simpleCommand.getCommandAnnotation().usage();
-				if (usage.isEmpty()) { // no usage provided, using the first
-										// alias
-					usage = simpleCommand.getCommandAnnotation().aliases()[0];
-				}
-				builder.append(usage);
-				String description = simpleCommand.getCommandAnnotation().description();
-				if (!description.equals("none")) {
-					builder.append(" | ").append(description);
-				}
+			String description = simpleCommand.getCommandAnnotation().description();
+			if (description.isEmpty()) {
+				description = "No description provided";
 			}
-			builder.append("\n```"); // end of xml code block
-			channel.sendMessage(builder.toString());
+			System.out.println(usage);
+			System.out.println(description);
+			eb.addField(usage, description, false);
 		}
+		eb.addField("*", "Multiple arguments of this kind are possible", false);
+		channel.sendMessage("", eb);
+
 	}
 
 	@Command(aliases = { "!!botinfo",
