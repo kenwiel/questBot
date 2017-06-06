@@ -23,28 +23,31 @@ public class ServerSetupMuteCommand implements CommandExecutor {
 		this.api = api;
 	}
 
-	@Command(aliases = { "!!setupMute", "!!muteSetup"}, description = "Sets up Muted permissions on all channels", usage = "!!setupMute", async = true)
-	public void onSetupMuteCommand(User user, Server server, Channel channel) throws InterruptedException, ExecutionException {
+	@Command(aliases = { "!!setupMute",
+			"!!muteSetup" }, description = "Sets up Muted permissions on all channels", usage = "!!setupMute", async = true)
+	public void onSetupMuteCommand(User user, Server server, Channel channel)
+			throws InterruptedException, ExecutionException {
 		if (!CommandUtils.isMod(user, server)) {
 			channel.sendMessage("!!mute : " + CommandResponses.errorPermissions);
 			return;
 		}
 		Role muted = CommandUtils.getMutedRole(server);
 
-		//muted role doesnt exist -> create it
+		// muted role doesnt exist -> create it
 		if (muted == null) {
-			//create muted role
+			// create muted role
 			muted = server.createRole().get();
 			Permissions rolePermissions = api.getPermissionsBuilder().build();
 			muted.update("Muted", new Color(0), false, rolePermissions, false, false).get();
 
 			muted = CommandUtils.getMutedRole(server);
 		}
-		
-		//channel permissions for muted role: send messages is denied
-		Permissions channelPermissions = api.getPermissionsBuilder().setState(PermissionType.SEND_MESSAGES, PermissionState.DENIED).build();
-		
-		for(Channel c : server.getChannels()) {
+
+		// channel permissions for muted role: send messages is denied
+		Permissions channelPermissions = api.getPermissionsBuilder()
+				.setState(PermissionType.SEND_MESSAGES, PermissionState.DENIED).build();
+
+		for (Channel c : server.getChannels()) {
 			c.updateOverwrittenPermissions(muted, channelPermissions);
 		}
 	}

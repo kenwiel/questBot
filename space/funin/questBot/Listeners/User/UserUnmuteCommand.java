@@ -1,8 +1,8 @@
 package space.funin.questBot.Listeners.User;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import de.btobastian.javacord.DiscordAPI;
 import de.btobastian.javacord.entities.Channel;
@@ -13,7 +13,6 @@ import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import space.funin.questBot.CommandResponses;
-import space.funin.questBot.runnables.RunnableUnmute;
 import space.funin.questBot.utils.CommandUtils;
 
 public class UserUnmuteCommand implements CommandExecutor {
@@ -27,7 +26,7 @@ public class UserUnmuteCommand implements CommandExecutor {
 
 	@Command(aliases = { "!!unmute",
 			"!!um" }, description = "Unmutes a user. Moderator only.", usage = "!!unmute [@user]*", async = true)
-	public void onMuteCommand(String[] args, Message message, User user, Server server, Channel channel) {
+	public void onMuteCommand(String[] args, Message message, User user, Server server, Channel channel) throws InterruptedException, ExecutionException {
 		if (!CommandUtils.isMod(user, server)) {
 			channel.sendMessage("!!mute : " + CommandResponses.errorPermissions);
 			return;
@@ -36,9 +35,12 @@ public class UserUnmuteCommand implements CommandExecutor {
 		List<User> unmuteList = message.getMentions();
 		Role muted = CommandUtils.getMutedRole(server);
 
+		if(muted == null) {
+			System.out.println("muted is null");
+		}
+		
 		for (User u : unmuteList) {
-			muted.addUser(u);
-			executor.schedule(new RunnableUnmute(u, muted), 0, TimeUnit.MINUTES);
+			muted.removeUser(u).get();
 			message.reply("**Unmuted: **" + u.getName());
 		}
 

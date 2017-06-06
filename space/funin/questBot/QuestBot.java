@@ -34,6 +34,7 @@ import space.funin.questBot.Listeners.Role.RoleDeleteCommand;
 import space.funin.questBot.Listeners.Role.RoleJoinCommand;
 import space.funin.questBot.Listeners.Role.RoleLeaveCommand;
 import space.funin.questBot.Listeners.Role.RoleListCommand;
+import space.funin.questBot.Listeners.Server.ServerSetupMuteCommand;
 import space.funin.questBot.Listeners.User.UserMuteCommand;
 import space.funin.questBot.Listeners.User.UserUnmuteCommand;
 import space.funin.questBot.runnables.RunnableCatalogFetcher;
@@ -82,6 +83,8 @@ public class QuestBot {
 				commandHandler.registerCommand(new RoleJoinCommand());
 				commandHandler.registerCommand(new RoleLeaveCommand());
 				commandHandler.registerCommand(new RoleListCommand());
+				
+				commandHandler.registerCommand(new ServerSetupMuteCommand(api));
 
 				commandHandler.registerCommand(new UserMuteCommand(executor, api));
 				commandHandler.registerCommand(new UserUnmuteCommand(executor, api));
