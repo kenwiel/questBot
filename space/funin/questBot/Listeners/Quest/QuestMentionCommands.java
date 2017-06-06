@@ -1,4 +1,4 @@
-package space.funin.questBot.Listeners;
+package space.funin.questBot.Listeners.Quest;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
+import de.btobastian.sdcf4j.CommandExecutor;
 import javach.Thread;
 import space.funin.questBot.CommandResponses;
 import space.funin.questBot.QuestBot;
@@ -25,7 +26,7 @@ import space.funin.questBot.utils.CommandUtils;
  * @author ayylmao
  *
  */
-public class MentionListener implements MessageCreateListener {
+public class QuestMentionCommands implements MessageCreateListener, CommandExecutor {
     
     public void onMessageCreate(DiscordAPI api, Message message) {
     	Channel channel = message.getChannelReceiver();

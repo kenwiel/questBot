@@ -1,4 +1,4 @@
-package space.funin.questBot.Listeners;
+package space.funin.questBot.Listeners.Bot;
 
 import java.util.concurrent.TimeUnit;
 
@@ -16,28 +16,22 @@ import space.funin.questBot.utils.CommandUtils;
  * 
  * Handles commands to do with quest updates
  */
-public class UpdateListener implements CommandExecutor {
+public class BotSettingsCommand implements CommandExecutor {
 
-    @Command(aliases = { "!!save" }, description = "Manually save quests to disk", usage = "!!save", async = true)
+    @Command(aliases = { "!!save" }, description = "Manually save quests to disk", usage = "!!save", async = true, showInHelpPage = false)
     public void onSaveCommand(String[] args, Channel channel) {
         boolean isEmbed = CommandUtils.isEmbed(args);
         Settings.save();
         CommandUtils.saveLoadResponse(true, channel, isEmbed);
     }
 
-    @Command(aliases = { "!!load", "!!reload" }, description = "Manually reload quests from disk", usage = "!!load", async = true)
+    @Command(aliases = { "!!load", "!!reload" }, description = "Manually reload quests from disk", usage = "!!load", async = true, showInHelpPage = false)
     public void onLoadCommand(String[] args, Channel channel) {
         boolean isEmbed = CommandUtils.isEmbed(args);
         Settings.reload();
         CommandUtils.saveLoadResponse(false, channel, isEmbed);
     }
     
-    @Command(aliases = { "!!cache" }, description = "Manually update the qst cache", usage = "!!cache", async = true)
-    public void onCacheCommand(String[] args, Channel channel) {
-        boolean isEmbed = CommandUtils.isEmbed(args);
-        QuestBot.getExecutor().schedule(new RunnableCatalogFetcher(), 0, TimeUnit.SECONDS);
-        CommandUtils.updateCache(channel, isEmbed);
-    }
     
     
     

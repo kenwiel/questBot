@@ -19,12 +19,23 @@ import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import javach.Board.specBoard;
-import space.funin.questBot.Listeners.HelpListener;
-import space.funin.questBot.Listeners.MentionListener;
-import space.funin.questBot.Listeners.ModListener;
-import space.funin.questBot.Listeners.QuestListener;
-import space.funin.questBot.Listeners.RoleListener;
-import space.funin.questBot.Listeners.UpdateListener;
+import space.funin.questBot.Listeners.Bot.BotInfoCommand;
+import space.funin.questBot.Listeners.Bot.BotSettingsCommand;
+import space.funin.questBot.Listeners.Commands.CommandsAliasCommand;
+import space.funin.questBot.Listeners.Commands.CommandsHelpCommand;
+import space.funin.questBot.Listeners.Message.MessagePurgeCommand;
+import space.funin.questBot.Listeners.Quest.QuestCacheCommand;
+import space.funin.questBot.Listeners.Quest.QuestCreateCommand;
+import space.funin.questBot.Listeners.Quest.QuestDeleteCommand;
+import space.funin.questBot.Listeners.Quest.QuestInfoCommand;
+import space.funin.questBot.Listeners.Quest.QuestMentionCommands;
+import space.funin.questBot.Listeners.Role.RoleCreateCommand;
+import space.funin.questBot.Listeners.Role.RoleDeleteCommand;
+import space.funin.questBot.Listeners.Role.RoleJoinCommand;
+import space.funin.questBot.Listeners.Role.RoleLeaveCommand;
+import space.funin.questBot.Listeners.Role.RoleListCommand;
+import space.funin.questBot.Listeners.User.UserMuteCommand;
+import space.funin.questBot.Listeners.User.UserUnmuteCommand;
 import space.funin.questBot.runnables.RunnableCatalogFetcher;
 import javach.Thread;
 
@@ -48,20 +59,32 @@ public class QuestBot {
 				api.setGame("RTFM | !!help");
 				CommandHandler commandHandler = new JavacordHandler(api);
 
-				QuestListener questListener = new QuestListener();
-				RoleListener roleListener = new RoleListener();
-				UpdateListener updateListener = new UpdateListener();
-				HelpListener helpListener = new HelpListener(commandHandler);
-				ModListener modListener = new ModListener(executor, api);
 
 				// reacts to the @mention, not to a command
-				MentionListener mentionListener = new MentionListener();
+				QuestMentionCommands mentionListener = new QuestMentionCommands();
 
-				commandHandler.registerCommand(questListener);
-				commandHandler.registerCommand(roleListener);
-				commandHandler.registerCommand(updateListener);
-				commandHandler.registerCommand(helpListener);
-				commandHandler.registerCommand(modListener);
+				commandHandler.registerCommand(new BotInfoCommand(api));
+				commandHandler.registerCommand(new BotSettingsCommand());
+				
+				commandHandler.registerCommand(new CommandsAliasCommand(commandHandler));
+				commandHandler.registerCommand(new CommandsHelpCommand(commandHandler));
+				
+				commandHandler.registerCommand(new MessagePurgeCommand());
+				
+				commandHandler.registerCommand(new QuestCacheCommand());
+				commandHandler.registerCommand(new QuestCreateCommand());
+				commandHandler.registerCommand(new QuestDeleteCommand());
+				commandHandler.registerCommand(new QuestInfoCommand());
+				commandHandler.registerCommand(new QuestMentionCommands());
+				
+				commandHandler.registerCommand(new RoleCreateCommand());
+				commandHandler.registerCommand(new RoleDeleteCommand());
+				commandHandler.registerCommand(new RoleJoinCommand());
+				commandHandler.registerCommand(new RoleLeaveCommand());
+				commandHandler.registerCommand(new RoleListCommand());
+
+				commandHandler.registerCommand(new UserMuteCommand(executor, api));
+				commandHandler.registerCommand(new UserUnmuteCommand(executor, api));
 
 				api.registerListener(mentionListener);
 			}
