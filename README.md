@@ -50,7 +50,7 @@ Create the Quest from that
 
 ### "Hidden" commands  
 * !!save | Manually saves quest information to disk.  
-* !!load | Manually loads quest information.(Useful when a thread gets mentioned just after creation, as it might not be cached yet).  
+* !!load | Manually loads quest information. 
   
   
 #### Moderator only commands require either:  
