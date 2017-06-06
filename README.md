@@ -53,12 +53,12 @@ Create the Quest from that
 * !!load | Manually loads quest information.(Useful when a thread gets mentioned just after creation, as it might not be cached yet).  
   
   
-Moderator only commands require either:  
+#### Moderator only commands require either:  
 Administrator permission,  
 Manage Server permission, or  
 A role called "mod" or "moderator"  
 
-Some commands contain "special symbols"  
+#### Some commands contain "special symbols"  
 When [Square Brackets] surround an argument then that means the argument is mandatory for the command to work.  
 When \<Pointed Brackets\> surround an argument, then that means the argument is optional.  
 When a star (\[arg\]\*) follows after an argument, then that means the command can take any amount of arguments of this kind  
