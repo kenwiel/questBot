@@ -7,7 +7,9 @@ public class CommandResponses {
 	public static String errorPermissions = "Missing permissions. Requires a moderator Role";
 	public static String errorNull = "Target is null.";
 	public static String errorTimeout = "Operation took too long.";
-	public static String errorInvalidRole = "Operation on that role not possible.";
+	public static String errorInvalidRoleMissing = "User does not have specified role.";
+	public static String errorInvalidRoleUserHasIt = "User already has specified role.";
+	public static String errorNoMutedRole = "Muted role does not exist. Please run !!setupMute.";
 	
 	public static String[] mentionResponses = {
 			"I love you, too.",

@@ -32,7 +32,7 @@ public class RoleJoinCommand implements CommandExecutor {
 						e.printStackTrace();
 					}
 				} else {
-					channel.sendMessage("!!join: " + role.getMentionTag() + " : " + CommandResponses.errorInvalidRole);
+					channel.sendMessage("!!join: " + role.getMentionTag() + " : " + CommandResponses.errorInvalidRoleUserHasIt);
 				}
 			}
 		}

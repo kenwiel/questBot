@@ -9,7 +9,6 @@ import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import de.btobastian.sdcf4j.CommandHandler;
-import space.funin.questBot.utils.CommandUtils;
 
 /**
  * @author Ken Wieland

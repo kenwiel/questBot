@@ -25,7 +25,7 @@ public class RoleLeaveCommand implements CommandExecutor {
 				r.removeUser(user).get();
 				channel.sendMessage("!!leave: Removed role " + r.getMentionTag());
 			} else {
-				channel.sendMessage("!!leave: " + r.getMentionTag() + " : " + CommandResponses.errorInvalidRole);
+				channel.sendMessage("!!leave: " + r.getMentionTag() + " : " + CommandResponses.errorInvalidRoleMissing);
 			}
 		}
 	}

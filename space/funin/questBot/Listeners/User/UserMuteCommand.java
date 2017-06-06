@@ -61,7 +61,12 @@ public class UserMuteCommand implements CommandExecutor {
 
 		List<User> muteList = message.getMentions();
 		Role muted = CommandUtils.getMutedRole(server);
-
+		
+		if(muted == null) {
+			channel.sendMessage("!!mute : " + CommandResponses.errorNoMutedRole);
+			return;
+		}
+		
 		for (User u : muteList) {
 			muted.addUser(u);
 			executor.schedule(new RunnableUnmute(u, muted), duration, TimeUnit.MINUTES);
