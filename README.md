@@ -21,36 +21,36 @@ See !!help for commands
 
 ## Example
 Create the role @TutorialQuest
-!!createRole TutorialQuest
+  !!createRole TutorialQuest
 
 Create the Quest from that
-!!addQuest @TutorialQuest @TutorialUser "Tutorial Quest" "Tutorial" "In Tutorial quest, you learn how to use the questBot!"  
-!!join @TutorialQuest  
+  !!addQuest @TutorialQuest @TutorialUser "Tutorial Quest" "Tutorial" "In Tutorial quest, you learn how to use the questBot!"  
+  !!join @TutorialQuest  
 
-`@TutorialQuest`  
-`questBot: TutorialQuest #1: link.to/thread`  
+  `@TutorialQuest`  
+  `questBot: TutorialQuest #1: link.to/thread`  
 
 ## Full list of commands
-!!botinfo | Shows some information about the bot.
-!!alias [command] | Lists the aliases for a command
-!!help | Shows all available commands
-!!purge [amount] | Deletes the last x messages from the channel. Moderator only.
-!!cache | Manually update the qst cache
-!!newQuest [@role] [@qm] ["quest name"] ["search string"] <"quest description"> | Creates a new Quest.
-!!delQuest [@quest]* | Removes a Quest. Moderator only.
-!!QuestInfo [@quest]* | Gives additional info about a quest
-!!cr [roleName]* | Creates a mentionable role for quest creation. Moderator only.
-!!removeRole [@role]* | Removes role(s). Moderator Only.
-!!join [@mention]* | Join the mentioned role(s)
-!!leave [@mention]* | Leave the mentioned role(s)
-!!ranks | Outputs a list of ranks and their corresponding quests
-!!setupMute | Sets up Muted permissions on all channels
-!!mute [@user]* <Time> | Mutes a user (default 10 min). Moderator only.
-!!unmute [@user]* | Unmutes a user. Moderator only.
+* !!botinfo | Shows some information about the bot.
+* !!alias [command] | Lists the aliases for a command
+* !!help | Shows all available commands
+* !!purge [amount] | Deletes the last x messages from the channel. Moderator only.
+* !!cache | Manually update the qst cache
+* !!newQuest [@role] [@qm] ["quest name"] ["search string"] <"quest description"> | Creates a new Quest.
+* !!delQuest [@quest]* | Removes a Quest. Moderator only.
+* !!QuestInfo [@quest]* | Gives additional info about a quest
+* !!cr [roleName]* | Creates a mentionable role for quest creation. Moderator only.
+* !!removeRole [@role]* | Removes role(s). Moderator Only.
+* !!join [@mention]* | Join the mentioned role(s)
+* !!leave [@mention]* | Leave the mentioned role(s)
+* !!ranks | Outputs a list of ranks and their corresponding quests
+* !!setupMute | Sets up Muted permissions on all channels
+* !!mute [@user]* <Time> | Mutes a user (default 10 min). Moderator only.
+* !!unmute [@user]* | Unmutes a user. Moderator only.
 
-#"Hidden" commands
-!!save | Manually saves quest information to disk.
-!!load | Manually loads quest information.(Useful when a thread gets mentioned just after creation, as it might not be cached yet).
+### "Hidden" commands
+* !!save | Manually saves quest information to disk.
+* !!load | Manually loads quest information.(Useful when a thread gets mentioned just after creation, as it might not be cached yet).
 
 
 Moderator only commands require either:
