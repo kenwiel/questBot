@@ -12,7 +12,7 @@ import space.funin.questBot.utils.CommandUtils;
 public class QuestCacheCommand implements CommandExecutor {
 
 	@Command(aliases = {
-			"!!cache" }, description = "Manually update the qst cache", usage = "!!cache", async = true, showInHelpPage = false)
+			"!!cache" }, description = "Manually update the /qst/ cache", usage = "!!cache", async = true)
 	public void onCacheCommand(String[] args, Channel channel) {
 		boolean isEmbed = CommandUtils.isEmbed(args);
 		QuestBot.getExecutor().schedule(new RunnableCatalogFetcher(), 0, TimeUnit.SECONDS);
