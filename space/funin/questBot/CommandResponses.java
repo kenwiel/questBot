@@ -9,6 +9,7 @@ public class CommandResponses {
 	public static String errorTimeout = "Operation took too long.";
 	public static String errorInvalidRoleMissing = "User does not have specified role.";
 	public static String errorInvalidRoleUserHasIt = "User already has specified role.";
+	public static String errorInvalidRoleNotAValidTarget = "The specified role is not a valid target for this command.";
 	public static String errorNoMutedRole = "Muted role does not exist. Please run !!setupMute.";
 	
 	public static String[] mentionResponses = {

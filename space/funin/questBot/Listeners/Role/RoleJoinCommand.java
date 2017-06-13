@@ -22,17 +22,22 @@ public class RoleJoinCommand implements CommandExecutor {
 				// if the mentioned role is a quest
 				roleID = s.substring(3, s.length() - 1);
 				Role role = QuestBot.getRole(roleID, server);
-
-				if (Settings.getMap().containsKey(roleID) && !user.getRoles(server).contains(role)) {
-					try {
-						role.addUser(user).get();
-						channel.sendMessage("!!join: Joined role " + role.getMentionTag());
-					} catch (InterruptedException | ExecutionException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
+				if (Settings.getMap().containsKey(roleID)) {
+					if (!user.getRoles(server).contains(role)) {
+						try {
+							role.addUser(user).get();
+							channel.sendMessage("!!join: Joined role " + role.getMentionTag());
+						} catch (InterruptedException | ExecutionException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					} else {
+						channel.sendMessage(
+								"!!join: " + role.getMentionTag() + " : " + CommandResponses.errorInvalidRoleUserHasIt);
 					}
 				} else {
-					channel.sendMessage("!!join: " + role.getMentionTag() + " : " + CommandResponses.errorInvalidRoleUserHasIt);
+					channel.sendMessage(
+							"!!join: " + role.getMentionTag() + " : " + CommandResponses.errorInvalidRoleNotAValidTarget);
 				}
 			}
 		}
