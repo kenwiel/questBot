@@ -14,7 +14,7 @@ import space.funin.questBot.utils.CommandUtils;
 public class BotSettingsCommand implements CommandExecutor {
 
 	@Command(aliases = {
-			"!!save" }, description = "Manually save quests to disk", usage = "!!save", async = true, showInHelpPage = false)
+			"!!save" }, description = "Manually save settings to disk", usage = "!!save", async = true, showInHelpPage = false)
 	public void onSaveCommand(String[] args, Channel channel) {
 		boolean isEmbed = CommandUtils.isEmbed(args);
 		Settings.save();
@@ -22,7 +22,7 @@ public class BotSettingsCommand implements CommandExecutor {
 	}
 
 	@Command(aliases = { "!!load",
-			"!!reload" }, description = "Manually reload quests from disk", usage = "!!load", async = true, showInHelpPage = false)
+			"!!reload" }, description = "Manually reload settings from disk", usage = "!!load", async = true, showInHelpPage = false)
 	public void onLoadCommand(String[] args, Channel channel) {
 		boolean isEmbed = CommandUtils.isEmbed(args);
 		Settings.reload();

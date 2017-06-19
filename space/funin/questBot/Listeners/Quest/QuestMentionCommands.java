@@ -17,7 +17,6 @@ import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import de.btobastian.javacord.listener.message.MessageCreateListener;
 import de.btobastian.sdcf4j.CommandExecutor;
 import javach.Thread;
-import space.funin.questBot.CommandResponses;
 import space.funin.questBot.QuestBot;
 import space.funin.questBot.Settings;
 import space.funin.questBot.utils.CommandUtils;
@@ -48,8 +47,8 @@ public class QuestMentionCommands implements MessageCreateListener, CommandExecu
     
     private void onSelfMention(Channel channel) {
     	Random random = new Random();
-    	int responseNo = random.nextInt(CommandResponses.mentionResponses.length);
-    	channel.sendMessage(CommandResponses.mentionResponses[responseNo]);
+    	int responseNo = random.nextInt(Settings.getMentionResponses().length);
+    	channel.sendMessage(Settings.getMentionResponses()[responseNo]);
     }
     
     private void onGroupMention(DiscordAPI api, Message message, Channel channel) {
