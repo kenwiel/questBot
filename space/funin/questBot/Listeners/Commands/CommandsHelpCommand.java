@@ -23,7 +23,7 @@ public class CommandsHelpCommand implements CommandExecutor {
 	}
 
 	@Command(aliases = { "!!help", "!!h", "!!info",
-			"!!i" }, description = "Shows all available commands", usage = "!!help", async = true)
+			"!!i" }, description = "Shows all available commands, or detailed help for a single command", usage = "!!help <command>", async = true)
 	public void onHelpCommand(String[] args, User user, Channel channel) {
 		boolean isSpecific = false;
 
@@ -81,6 +81,10 @@ public class CommandsHelpCommand implements CommandExecutor {
 				builder.append(" | ").append(description);
 			}
 		}
+		builder.append("\n[Brackets] : Argument is required")
+		.append("\n<Brackets> : Argument is optional")
+		.append("\n * after an argument : Multiple arguments of this type are accepted");
+		
 		builder.append("\n```"); // end of xml code block
 		channel.sendMessage(builder.toString());
 
