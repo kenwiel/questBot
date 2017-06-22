@@ -25,33 +25,9 @@ import space.funin.questBot.utils.CommandUtils;
  * @author ayylmao
  *
  */
-public class QuestMentionCommands implements MessageCreateListener, CommandExecutor {
+public class QuestMentionCommand {
     
-    public void onMessageCreate(DiscordAPI api, Message message) {
-    	Channel channel = message.getChannelReceiver();
-    	User user = message.getAuthor();
-    	
-    	if(user.equals(api.getYourself()))
-    		return;
-    	
-        //only check messages that contain a group mention and DONT start with a bot command
-        if (message.getContent().contains("<@&") && !message.getContent().startsWith("!!")) {
-            onGroupMention(api, message, channel);
-        }
-        
-        //if bot is mentioned
-        if(message.getMentions().contains(api.getYourself()) && !message.getContent().startsWith("!!")) {
-        	onSelfMention(channel);
-        }
-    }
-    
-    private void onSelfMention(Channel channel) {
-    	Random random = new Random();
-    	int responseNo = random.nextInt(Settings.getMentionResponses().length);
-    	channel.sendMessage(Settings.getMentionResponses()[responseNo]);
-    }
-    
-    private void onGroupMention(DiscordAPI api, Message message, Channel channel) {
+    public static void onGroupMention(DiscordAPI api, Message message, Channel channel) {
     	List<String> mentions  = CommandUtils.getRoleIDs(message.getMentionedRoles());
         
         for(String s : mentions) {
@@ -63,7 +39,7 @@ public class QuestMentionCommands implements MessageCreateListener, CommandExecu
         }
     }
     
-    private void foundThread(Thread thread, Channel channel) {
+    private static void foundThread(Thread thread, Channel channel) {
     	System.out.println(thread == null);
     	if(thread == null) 
     		return;
@@ -81,7 +57,7 @@ public class QuestMentionCommands implements MessageCreateListener, CommandExecu
      * @param questName stuff to find in the subject field
      * @return the most recent thread with questName in the subject field
      */
-    private Thread getThreads(String questName) {
+    private static Thread getThreads(String questName) {
 		//get a list of all threads on /qst/
 		
 		List<Thread> threadList = new ArrayList<Thread>( QuestBot.qst.cache.values() );

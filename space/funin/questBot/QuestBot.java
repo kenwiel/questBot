@@ -19,6 +19,7 @@ import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import javach.Board.specBoard;
+import space.funin.questBot.Listeners.NonCommandListener;
 import space.funin.questBot.Listeners.Bot.BotInfoCommand;
 import space.funin.questBot.Listeners.Bot.BotSettingsCommand;
 import space.funin.questBot.Listeners.Commands.CommandsAliasCommand;
@@ -28,7 +29,7 @@ import space.funin.questBot.Listeners.Quest.QuestCacheCommand;
 import space.funin.questBot.Listeners.Quest.QuestCreateCommand;
 import space.funin.questBot.Listeners.Quest.QuestDeleteCommand;
 import space.funin.questBot.Listeners.Quest.QuestInfoCommand;
-import space.funin.questBot.Listeners.Quest.QuestMentionCommands;
+import space.funin.questBot.Listeners.Quest.QuestMentionCommand;
 import space.funin.questBot.Listeners.Role.RoleCreateCommand;
 import space.funin.questBot.Listeners.Role.RoleDeleteCommand;
 import space.funin.questBot.Listeners.Role.RoleJoinCommand;
@@ -61,9 +62,11 @@ public class QuestBot {
 				CommandHandler commandHandler = new JavacordHandler(api);
 
 
-				// reacts to the @mention, not to a command
-				QuestMentionCommands mentionListener = new QuestMentionCommands();
+				// handles reactions to things that arent commands
+				NonCommandListener nonCommandListener = new NonCommandListener();
+				api.registerListener(nonCommandListener);
 
+				// handles all other commands
 				commandHandler.registerCommand(new BotInfoCommand(api));
 				commandHandler.registerCommand(new BotSettingsCommand());
 				
@@ -76,7 +79,6 @@ public class QuestBot {
 				commandHandler.registerCommand(new QuestCreateCommand());
 				commandHandler.registerCommand(new QuestDeleteCommand());
 				commandHandler.registerCommand(new QuestInfoCommand());
-				commandHandler.registerCommand(new QuestMentionCommands());
 				
 				commandHandler.registerCommand(new RoleCreateCommand());
 				commandHandler.registerCommand(new RoleDeleteCommand());
@@ -89,7 +91,6 @@ public class QuestBot {
 				commandHandler.registerCommand(new UserMuteCommand(executor, api));
 				commandHandler.registerCommand(new UserUnmuteCommand(executor, api));
 
-				api.registerListener(mentionListener);
 			}
 
 			@Override
