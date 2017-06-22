@@ -10,18 +10,18 @@ public class BotMentionCommand {
 		Integer responseNo = null;
 		Random random = new Random();
 
-		for (String s : args) {
-			try {
-				responseNo = Integer.parseInt(s);
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
+		if (!(args == null)) {
+			for (String s : args) {
+				try {
+					responseNo = Integer.parseInt(s);
+				} catch (NumberFormatException e) {
+
+				}
 			}
 		}
 		if (responseNo == null || responseNo < 0 || responseNo > Settings.getMentionResponses().toArray().length)
 			responseNo = random.nextInt(Settings.getMentionResponses().toArray().length);
-		
-		
-		
+
 		channel.sendMessage((String) Settings.getMentionResponses().toArray()[responseNo]);
 	}
 }
