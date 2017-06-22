@@ -11,4 +11,5 @@ public class CommandResponses {
 	public static String errorInvalidRoleUserHasIt = "User already has specified role.";
 	public static String errorInvalidRoleNotAValidTarget = "The specified role is not a valid target for this command.";
 	public static String errorNoMutedRole = "Muted role does not exist. Please run !!setupMute.";
+	public static String errorMessageLength = "Message too long";
 }

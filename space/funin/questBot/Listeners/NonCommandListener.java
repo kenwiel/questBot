@@ -9,22 +9,38 @@ import space.funin.questBot.Listeners.Bot.BotMentionCommand;
 import space.funin.questBot.Listeners.Quest.QuestMentionCommand;
 
 public class NonCommandListener implements MessageCreateListener {
-	
-    public void onMessageCreate(final DiscordAPI api, final Message message) {
-    	final Channel channel = message.getChannelReceiver();
-    	final User user = message.getAuthor();
-    	
-    	if(user.equals(api.getYourself()))
-    		return;
-    	
-        //only check messages that contain a group mention and DONT start with a bot command
-        if (message.getContent().contains("<@&") && !message.getContent().startsWith("!!")) {
-            QuestMentionCommand.onGroupMention(api, message, channel);
-        }
-        
-        //if bot is mentioned
-        if(message.getMentions().contains(api.getYourself()) && !message.getContent().startsWith("!!")) {
-        	BotMentionCommand.onBotMention(channel);
-        }
-    }
+
+	public void onMessageCreate(final DiscordAPI api, final Message message) {
+		final Channel channel = message.getChannelReceiver();
+		final User user = message.getAuthor();
+		final String[] args = getArgs(message);
+
+		if (user.equals(api.getYourself()))
+			return;
+
+		// only check messages that contain a group mention and DONT start with
+		// a bot command
+		if (message.getContent().contains("<@&") && !message.getContent().startsWith("!!")) {
+			QuestMentionCommand.onGroupMention(api, message, channel);
+		}
+
+		// if bot is mentioned
+		if (message.getMentions().contains(api.getYourself()) && !message.getContent().startsWith("!!")) {
+			BotMentionCommand.onBotMention(channel, args);
+		}
+	}
+
+	private String[] getArgs(Message message) {
+		String[] splitContent = message.getContent().split(" ");
+		
+		if (splitContent.length <= 1)
+			return null;
+		
+		String[] temporary = new String[splitContent.length - 1];
+		//remove the first entry
+		for (int i = 0; i < temporary.length; i++) {
+			temporary[i] = splitContent[i + 1];
+		}
+		return temporary;
+	}
 }

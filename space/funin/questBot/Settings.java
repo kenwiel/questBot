@@ -72,6 +72,17 @@ public class Settings {
 			}
 		}
 	}
+	
+	public static void addResponse(String newResponse) {
+		   String[] temporary = new String[mentionResponses.length + 1];
+
+		   for (int i = 0; i < mentionResponses.length; i++){
+		      temporary[i] = mentionResponses[i];
+		   }
+		   temporary[mentionResponses.length+1] = newResponse;
+		   saveMentionResponses(temporary);
+		   loadMentionResponses();
+	}
 
 	public static void save() {
 		saveMap(roleQuestMap);
