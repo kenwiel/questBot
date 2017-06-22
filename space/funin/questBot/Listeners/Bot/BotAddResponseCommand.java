@@ -2,7 +2,6 @@ package space.funin.questBot.Listeners.Bot;
 
 import java.util.concurrent.ExecutionException;
 
-import de.btobastian.javacord.DiscordAPI;
 import de.btobastian.javacord.entities.Channel;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
@@ -10,11 +9,7 @@ import space.funin.questBot.CommandResponses;
 import space.funin.questBot.Settings;
 
 public class BotAddResponseCommand implements CommandExecutor {
-	DiscordAPI api;
 	
-	public BotAddResponseCommand(DiscordAPI api) {
-		this.api = api;
-	}
 	@Command(aliases = { "!!addResponse", "!!ar" }, description = "Adds a response to the bots auto responder", usage = "!!addResponse [response]")
 	public void onAddResponseCommand(String[] args, Channel channel) throws InterruptedException, ExecutionException {
 		StringBuilder sb = new StringBuilder();

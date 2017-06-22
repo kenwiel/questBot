@@ -8,6 +8,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -21,7 +22,7 @@ public class Settings {
 	private static String[] quiet = { "--q", "-q", "--noEmbed", "--nE" };
 	private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
 	private static Map<String, Quest> roleQuestMap = new HashMap<String, Quest>();
-	private static String[] mentionResponses = loadMentionResponses();
+	private static List<String> mentionResponses = loadMentionResponses();
 	private static Logger logger = LoggerFactory.getLogger(Settings.class);
 
 	public static String loadToken() {
@@ -41,12 +42,12 @@ public class Settings {
 		return "";
 	}
 
-	public static String[] loadMentionResponses() {
+	public static List<String> loadMentionResponses() {
 		File responseFile = new File(directory + "responses");
 		if (responseFile.exists()) {
 			String contents = readFile(responseFile);
 			Gson gson = new Gson();
-			return gson.fromJson(contents, TypeTokens.ARRAY_STRING);
+			return gson.fromJson(contents, TypeTokens.LIST_STRING);
 		} else {
 			try {
 				responseFile.createNewFile();
@@ -58,10 +59,10 @@ public class Settings {
 		}
 	}
 
-	public static void saveMentionResponses(String[] mentionResponses) {
+	public static void saveMentionResponses() {
 		File responseFile = new File(directory + "responses");
 		if (responseFile.exists()) {
-			String mentionResponsesGSON = new Gson().toJson(mentionResponses, TypeTokens.ARRAY_STRING);
+			String mentionResponsesGSON = new Gson().toJson(mentionResponses, TypeTokens.LIST_STRING);
 			writeFile(responseFile, mentionResponsesGSON);
 		} else {
 			try {
@@ -72,16 +73,11 @@ public class Settings {
 			}
 		}
 	}
-	
-	public static void addResponse(String newResponse) {
-		   String[] temporary = new String[mentionResponses.length + 1];
 
-		   for (int i = 0; i < mentionResponses.length; i++){
-		      temporary[i] = mentionResponses[i];
-		   }
-		   temporary[mentionResponses.length+1] = newResponse;
-		   saveMentionResponses(temporary);
-		   loadMentionResponses();
+	public static void addResponse(String newResponse) {
+		mentionResponses.add(newResponse);
+		
+		saveMentionResponses();
 	}
 
 	public static void save() {
@@ -168,10 +164,10 @@ public class Settings {
 		roleQuestMap.remove(roleID, quest);
 	}
 
-	public static String[] getMentionResponses() {
+	public static List<String> getMentionResponses() {
 		return mentionResponses;
 	}
-	
+
 	public static Map<String, Quest> getMap() {
 		return roleQuestMap;
 	}

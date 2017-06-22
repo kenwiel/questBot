@@ -6,9 +6,22 @@ import de.btobastian.javacord.entities.Channel;
 import space.funin.questBot.Settings;
 
 public class BotMentionCommand {
-    public static void onBotMention(Channel channel) {
-    	Random random = new Random();
-    	int responseNo = random.nextInt(Settings.getMentionResponses().length);
-    	channel.sendMessage(Settings.getMentionResponses()[responseNo]);
-    }
+	public static void onBotMention(Channel channel, String[] args) {
+		Integer responseNo = null;
+		Random random = new Random();
+
+		for (String s : args) {
+			try {
+				responseNo = Integer.parseInt(s);
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			}
+		}
+		if (responseNo == null || responseNo < 0 || responseNo > Settings.getMentionResponses().toArray().length)
+			responseNo = random.nextInt(Settings.getMentionResponses().toArray().length);
+		
+		
+		
+		channel.sendMessage((String) Settings.getMentionResponses().toArray()[responseNo]);
+	}
 }

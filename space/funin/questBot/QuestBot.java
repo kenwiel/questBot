@@ -20,6 +20,7 @@ import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import javach.Board.specBoard;
 import space.funin.questBot.Listeners.NonCommandListener;
+import space.funin.questBot.Listeners.Bot.BotAddResponseCommand;
 import space.funin.questBot.Listeners.Bot.BotInfoCommand;
 import space.funin.questBot.Listeners.Bot.BotSettingsCommand;
 import space.funin.questBot.Listeners.Commands.CommandsAliasCommand;
@@ -29,7 +30,6 @@ import space.funin.questBot.Listeners.Quest.QuestCacheCommand;
 import space.funin.questBot.Listeners.Quest.QuestCreateCommand;
 import space.funin.questBot.Listeners.Quest.QuestDeleteCommand;
 import space.funin.questBot.Listeners.Quest.QuestInfoCommand;
-import space.funin.questBot.Listeners.Quest.QuestMentionCommand;
 import space.funin.questBot.Listeners.Role.RoleCreateCommand;
 import space.funin.questBot.Listeners.Role.RoleDeleteCommand;
 import space.funin.questBot.Listeners.Role.RoleJoinCommand;
@@ -67,6 +67,7 @@ public class QuestBot {
 				api.registerListener(nonCommandListener);
 
 				// handles all other commands
+				commandHandler.registerCommand(new BotAddResponseCommand());
 				commandHandler.registerCommand(new BotInfoCommand(api));
 				commandHandler.registerCommand(new BotSettingsCommand());
 				
