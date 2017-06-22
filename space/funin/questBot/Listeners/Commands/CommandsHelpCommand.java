@@ -81,7 +81,7 @@ public class CommandsHelpCommand implements CommandExecutor {
 				builder.append(" | ").append(description);
 			}
 		}
-		builder.append("\n[Brackets] : Argument is required")
+		builder.append("\n\n[Brackets] : Argument is required")
 		.append("\n<Brackets> : Argument is optional")
 		.append("\n * after an argument : Multiple arguments of this type are accepted");
 		
