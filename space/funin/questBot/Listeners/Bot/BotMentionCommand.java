@@ -21,7 +21,7 @@ public class BotMentionCommand {
 				}
 			}
 		}
-		if (responseNo == null || responseNo < 0 || responseNo > Settings.loadMentionResponses().size())
+		if (responseNo == null || responseNo < 0 || responseNo >= Settings.loadMentionResponses().size())
 			responseNo = random.nextInt(responseList.size());
 
 		
