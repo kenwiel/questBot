@@ -1,5 +1,6 @@
 package space.funin.questBot.Listeners.Bot;
 
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import de.btobastian.javacord.entities.Channel;
@@ -26,7 +27,10 @@ public class BotAddResponseCommand implements CommandExecutor {
 		}
 		
 		//otherwise, add the response
-		Settings.addResponse(newResponse);
+		List<String> responseList = Settings.loadMentionResponses();
+		responseList.add(newResponse);
+		Settings.saveMentionResponses(responseList);
+		
 		channel.sendMessage("!!addResponse : added Response to List.");
 	}
 }

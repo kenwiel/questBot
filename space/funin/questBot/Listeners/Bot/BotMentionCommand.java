@@ -1,5 +1,6 @@
 package space.funin.questBot.Listeners.Bot;
 
+import java.util.List;
 import java.util.Random;
 
 import de.btobastian.javacord.entities.Channel;
@@ -9,6 +10,7 @@ public class BotMentionCommand {
 	public static void onBotMention(Channel channel, String[] args) {
 		Integer responseNo = null;
 		Random random = new Random();
+		List<String> responseList = Settings.loadMentionResponses();
 
 		if (!(args == null)) {
 			for (String s : args) {
@@ -19,9 +21,11 @@ public class BotMentionCommand {
 				}
 			}
 		}
-		if (responseNo == null || responseNo < 0 || responseNo > Settings.getMentionResponses().size())
-			responseNo = random.nextInt(Settings.getMentionResponses().size());
+		if (responseNo == null || responseNo < 0 || responseNo > Settings.loadMentionResponses().size())
+			responseNo = random.nextInt(responseList.size());
 
-		channel.sendMessage((String) Settings.getMentionResponses().get(responseNo));
+		
+		
+		channel.sendMessage(responseList.get(responseNo));
 	}
 }

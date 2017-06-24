@@ -22,7 +22,6 @@ public class Settings {
 	private static String[] quiet = { "--q", "-q", "--noEmbed", "--nE" };
 	private static final Charset CHARSET_UTF_8 = Charset.forName("UTF-8");
 	private static Map<String, Quest> roleQuestMap = new HashMap<String, Quest>();
-	private static List<String> mentionResponses = loadMentionResponses();
 	private static Logger logger = LoggerFactory.getLogger(Settings.class);
 
 	public static String loadToken() {
@@ -59,10 +58,10 @@ public class Settings {
 		}
 	}
 
-	public static void saveMentionResponses() {
+	public static void saveMentionResponses(List<String> mentionResponseList) {
 		File responseFile = new File(directory + "responses");
 		if (responseFile.exists()) {
-			String mentionResponsesGSON = new Gson().toJson(mentionResponses, TypeTokens.LIST_STRING);
+			String mentionResponsesGSON = new Gson().toJson(mentionResponseList, TypeTokens.LIST_STRING);
 			writeFile(responseFile, mentionResponsesGSON);
 		} else {
 			try {
@@ -72,12 +71,6 @@ public class Settings {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	public static void addResponse(String newResponse) {
-		mentionResponses.add(newResponse);
-		
-		saveMentionResponses();
 	}
 
 	public static void save() {
@@ -112,7 +105,6 @@ public class Settings {
 	public static void reload() {
 		roleQuestMap = new HashMap<String, Quest>();
 		loadMap();
-		mentionResponses = loadMentionResponses();
 	}
 
 	private static void loadMap() {
@@ -162,10 +154,6 @@ public class Settings {
 
 	public static void removeMap(String roleID, Quest quest) {
 		roleQuestMap.remove(roleID, quest);
-	}
-
-	public static List<String> getMentionResponses() {
-		return mentionResponses;
 	}
 
 	public static Map<String, Quest> getMap() {
