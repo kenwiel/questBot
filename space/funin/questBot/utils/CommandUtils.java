@@ -66,7 +66,7 @@ public class CommandUtils {
     			return true;
     		if(rolePermissions.getState(PermissionType.MANAGE_SERVER).equals(PermissionState.ALLOWED))
     			return true;
-    		if(r.getName().equalsIgnoreCase("mod") || r.getName().equalsIgnoreCase("moderator"))
+    		if(r.getName().equalsIgnoreCase("mod") || r.getName().equalsIgnoreCase("moderator") || r.getName().equalsIgnoreCase("botMod"))
     			return true;
     	}
     	return false;

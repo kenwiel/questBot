@@ -19,9 +19,9 @@ public class BotMentionCommand {
 				}
 			}
 		}
-		if (responseNo == null || responseNo < 0 || responseNo > Settings.getMentionResponses().toArray().length)
-			responseNo = random.nextInt(Settings.getMentionResponses().toArray().length);
+		if (responseNo == null || responseNo < 0 || responseNo > Settings.getMentionResponses().size())
+			responseNo = random.nextInt(Settings.getMentionResponses().size());
 
-		channel.sendMessage((String) Settings.getMentionResponses().toArray()[responseNo]);
+		channel.sendMessage((String) Settings.getMentionResponses().get(responseNo));
 	}
 }
