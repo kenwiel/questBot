@@ -3,6 +3,8 @@ package space.funin.questBot;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import de.btobastian.javacord.entities.Channel;
+import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
 
 public class Quest {
@@ -39,6 +41,36 @@ public class Quest {
         logger.info("Questname: " + name);
         logger.info("Quest title: " + search);
         logger.info("Quest description: " + description);
+    }
+    
+    public boolean isValid(Server server, Channel channel) {
+    	if(roleID == null)
+    		return false;
+    	if(qmID == null)
+    		return false;
+    	if(name == null)
+    		return false;
+    	if(search == null)
+    		return false;
+    	
+    	//make sure the role and QM still "exist"
+    	try {
+    		QuestBot.getRole(roleID, server).getName();
+    	} catch (NullPointerException e){
+    		channel.sendMessage("!!ranks : "+ name + " : " + CommandResponses.errorQuestRoleDoesNotExist);
+    		channel.sendMessage("!!ranks: Removing Quest from Database. Please re-create it.");
+    		Settings.removeMap(roleID, this);
+    		return false;
+    	}
+    	try {
+    		QuestBot.getUser(qmID).getName();
+    	} catch (NullPointerException e){
+    		channel.sendMessage("!!ranks : "+ name + " : " + CommandResponses.errorQuestUserDoesNotExist);
+    		channel.sendMessage("!!ranks: Removing Quest from Database. Please re-create it.");
+    		Settings.removeMap(roleID, this);
+    		return false;
+    	}
+    	return true;
     }
     
     public Quest(String roleID, String qmID, String name, String search) {

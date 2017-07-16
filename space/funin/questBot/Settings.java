@@ -155,6 +155,14 @@ public class Settings {
 	public static void removeMap(String roleID, Quest quest) {
 		roleQuestMap.remove(roleID, quest);
 	}
+	
+	public static void removeMap(Quest quest) {
+		for(Entry<String, Quest> e : roleQuestMap.entrySet()) {
+			if (e.getValue().equals(quest)) {
+				roleQuestMap.remove(e.getKey(), e.getValue());
+			}
+		}
+	}
 
 	public static Map<String, Quest> getMap() {
 		return roleQuestMap;

@@ -16,7 +16,7 @@ import space.funin.questBot.Settings;
 import space.funin.questBot.utils.CommandUtils;
 
 public class RoleListCommand implements CommandExecutor {
-    @Command(aliases = { "!!listRoles","!!ranks", "!!roles", "!!getPairs", "!!getPair", "!!get", "!!pair", "!!pairs", "!!quests", "!!q" },
+	@Command(aliases = { "!!listRoles","!!ranks", "!!roles", "!!getPairs", "!!getPair", "!!get", "!!pair", "!!pairs", "!!quests", "!!q" },
             description = "Outputs a list of ranks and their corresponding quests", usage = "!!ranks", async = true)
     public void onGetPairCommand(String[] args, User user, Channel channel, Server server) {
         boolean isEmbed = CommandUtils.isEmbed(args);
@@ -25,7 +25,9 @@ public class RoleListCommand implements CommandExecutor {
             eb.setColor(Color.CYAN);
             
             for (Quest q : Settings.getMap().values()) {
-                eb.addField(q.getName(), QuestBot.getRole(q.getRole(), server).getName(), true);
+            	if(q.isValid(server, channel)) {
+                	eb.addField(q.getName(), QuestBot.getRole(q.getRole(), server).getName(), true);
+            	}
             }
             channel.sendMessage("", eb);
             
