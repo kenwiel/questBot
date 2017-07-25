@@ -15,7 +15,7 @@ import space.funin.questBot.Settings;
 
 public class RoleLeaveCommand implements CommandExecutor {
 	@Command(aliases = { "!!leave",
-			"!!l" }, description = "Leave the mentioned role(s)", usage = "!!leave [@mention]*", async = true)
+			"!!l" }, description = "Leave the mentioned role(s)", usage = "!!leave [@role]*", async = true)
 	public void onLeaveCommand(Message message, User user, Channel channel, Server server)
 			throws InterruptedException, ExecutionException {
 		List<Role> mentions = message.getMentionedRoles();

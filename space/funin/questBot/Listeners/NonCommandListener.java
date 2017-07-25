@@ -26,7 +26,7 @@ public class NonCommandListener implements MessageCreateListener {
 
 		// if bot is mentioned
 		if (message.getMentions().contains(api.getYourself()) && !message.getContent().startsWith("!!")) {
-			BotMentionCommand.onBotMention(channel, args);
+			BotMentionCommand.onBotMention(args, channel);
 		}
 	}
 

@@ -19,7 +19,7 @@ public class CommandsAliasCommand implements CommandExecutor {
 	}
 
 	@Command(aliases = {
-			"!!alias" }, description = "Lists the aliases for a command", usage = "!!alias [command]", async = true)
+			"!!alias" }, description = "Lists the aliases for a command", usage = "!!alias [!!command]", async = true)
 	public void onAliasCommand(String[] args, Channel channel) {
 		boolean isEmbed = CommandUtils.isEmbed(args);
 		if (args.length == 0)

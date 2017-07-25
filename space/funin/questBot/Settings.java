@@ -40,6 +40,15 @@ public class Settings {
 		writeFile(tokenFile, "enter bot token here. This file should only contain \"token\", including the quotes.");
 		return "";
 	}
+	
+	public static HashMap<String, List<String>> loadPermissions() {
+		//TODO Implement
+		return null;
+	}
+	
+	public static void savePermissions() {
+		//TODO Implement
+	}
 
 	public static List<String> loadMentionResponses() {
 		File responseFile = new File(directory + "responses");

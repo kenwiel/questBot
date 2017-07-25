@@ -25,7 +25,7 @@ public class QuestDeleteCommand implements CommandExecutor {
 	private static Logger logger = LoggerFactory.getLogger(QuestDeleteCommand.class);
 
 	@Command(aliases = { "!!delQuest", "!!del", "!!deleteQuest", "!!rem",
-			"!!removeQuest" }, description = "Removes a Quest. Moderator only.", usage = "!!delQuest [@quest]*", async = true)
+			"!!removeQuest" }, description = "Removes a Quest. Moderator only.", usage = "!!delQuest [@role]*", async = true)
 	public void onDeleteCommand(String[] args, User user, Channel channel, Server server) {
 		// command only available to moderators
 		if (!CommandUtils.isMod(user, server)) {

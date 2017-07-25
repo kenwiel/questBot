@@ -14,7 +14,7 @@ import space.funin.questBot.Settings;
 
 public class RoleJoinCommand implements CommandExecutor {
 	@Command(aliases = { "!!join", "!!rank",
-			"!!role", }, description = "Join the mentioned role(s)", usage = "!!join [@mention]*", async = true)
+			"!!role", }, description = "Join the mentioned role(s)", usage = "!!join [@role]*", async = true)
 	public String onJoinCommand(String[] args, User user, Channel channel, Server server) {
 		String roleID;
 		for (String s : args) {

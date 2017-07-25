@@ -7,7 +7,7 @@ import de.btobastian.javacord.entities.Channel;
 import space.funin.questBot.Settings;
 
 public class BotMentionCommand {
-	public static void onBotMention(Channel channel, String[] args) {
+	public static void onBotMention(String[] args, Channel channel) {
 		Integer responseNo = null;
 		Random random = new Random();
 		List<String> responseList = Settings.loadMentionResponses();

@@ -21,7 +21,7 @@ public class QuestInfoCommand implements CommandExecutor {
 	private static Logger logger = LoggerFactory.getLogger(QuestInfoCommand.class);
 
 	@Command(aliases = { "!!questInfo", "!!qInfo", "!!quest",
-			"!!qi" }, description = "Gives additional info about a quest", usage = "!!QuestInfo [@quest]*", async = true)
+			"!!qi" }, description = "Gives additional info about a quest", usage = "!!QuestInfo [@role]*", async = true)
 	public void onQuestInfoCommand(String[] args, Channel channel, Server server, Message message) {
 		logger.info("entering info command");
 		Map<String, Quest> questListComplete = Settings.getMap();

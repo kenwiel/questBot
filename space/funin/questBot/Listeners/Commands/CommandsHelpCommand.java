@@ -23,7 +23,7 @@ public class CommandsHelpCommand implements CommandExecutor {
 	}
 
 	@Command(aliases = { "!!help", "!!h", "!!info",
-			"!!i" }, description = "Shows all available commands, or detailed help for a single command", usage = "!!help <command>", async = true)
+			"!!i" }, description = "Shows all available commands, or detailed help for a single command", usage = "!!help <!!command>", async = true)
 	public void onHelpCommand(String[] args, User user, Channel channel) {
 		boolean isSpecific = false;
 
