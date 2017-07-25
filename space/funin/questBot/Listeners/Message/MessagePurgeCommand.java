@@ -27,10 +27,15 @@ public class MessagePurgeCommand implements CommandExecutor {
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		}
-		if(amount <= 0 || amount == null)
+		if(amount <= 2 || amount == null) {
+			channel.sendMessage("!!purge : " + CommandResponses.errorNumberSmall);
 			return;
-		if(amount > 100)
+		}
+		if(amount > 100) {
+			channel.sendMessage("!!purge : " + CommandResponses.errorNumberBig + 
+					"\nLimiting to 100 messages.");
 			amount = 100;
+		}
 		
 		List<Message> lastMessages = null;
 		try {
@@ -38,13 +43,12 @@ public class MessagePurgeCommand implements CommandExecutor {
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
-		if(lastMessages == null) {
+		if(lastMessages == null || lastMessages.contains(null)) {
 			channel.sendMessage("!!purge : " + CommandResponses.errorNull);
 			return;
 		}
-		for(Message m : lastMessages) {
-			if(!m.equals(message))
-				m.delete();
-		}
+		
+		Message[] messages = lastMessages.toArray(new Message[lastMessages.size()]);
+		channel.bulkDelete(messages);
 	}
 }

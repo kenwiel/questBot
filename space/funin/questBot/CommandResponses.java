@@ -14,4 +14,6 @@ public class CommandResponses {
 	public static String errorMessageLength = "Message too long.";
 	public static String errorQuestRoleDoesNotExist = "The Role for the Quest does not exist.";
 	public static String errorQuestUserDoesNotExist = "The QM for the Quest does not exist.";
+	public static String errorNumberSmall = "Specified Number is too small.";
+	public static String errorNumberBig= "Specified Number is too big.";
 }
