@@ -39,7 +39,7 @@ public class MessagePurgeCommand implements CommandExecutor {
 		
 		List<Message> lastMessages = null;
 		try {
-			lastMessages = new ArrayList<Message>(channel.getMessageHistory(amount+1).get().getMessages());
+			lastMessages = new ArrayList<Message>(channel.getMessageHistoryBefore(message, amount).get().getMessages());
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
 		}
@@ -47,7 +47,6 @@ public class MessagePurgeCommand implements CommandExecutor {
 			channel.sendMessage("!!purge : " + CommandResponses.errorNull);
 			return;
 		}
-		
 		Message[] messages = lastMessages.toArray(new Message[lastMessages.size()]);
 		channel.bulkDelete(messages);
 	}

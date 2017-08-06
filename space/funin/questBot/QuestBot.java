@@ -86,7 +86,7 @@ public class QuestBot {
 				commandHandler.registerCommand(new RoleJoinCommand());
 				commandHandler.registerCommand(new RoleLeaveCommand());
 				commandHandler.registerCommand(new RoleListCommand());
-				
+								
 				commandHandler.registerCommand(new ServerSetupMuteCommand(api));
 
 				commandHandler.registerCommand(new UserMuteCommand(executor, api));

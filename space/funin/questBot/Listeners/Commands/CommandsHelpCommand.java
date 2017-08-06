@@ -81,9 +81,11 @@ public class CommandsHelpCommand implements CommandExecutor {
 				builder.append(" | ").append(description);
 			}
 		}
-		builder.append("\n\n[Brackets] : Argument is required")
-		.append("\n<Brackets> : Argument is optional")
-		.append("\n * after an argument : Multiple arguments of this type are accepted");
+		builder.append("\n\n[Argument] : Argument is required")
+		.append("\n<Argument> : Argument is optional")
+		.append("\n* after an argument : Multiple arguments of this type are accepted")
+		.append("\n[], <>, * denote whether a command is required or not. They are not to be used when running the command."
+				+ "\nExample: !!addResponse [response]  -> !!addResponse Don't type the brackets!");
 		
 		builder.append("\n```"); // end of xml code block
 		channel.sendMessage(builder.toString());

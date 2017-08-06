@@ -38,7 +38,7 @@ public class ServerSetupMuteCommand implements CommandExecutor {
 			// create muted role
 			muted = server.createRole().get();
 			Permissions rolePermissions = api.getPermissionsBuilder().build();
-			muted.update("Muted", new Color(0), false, rolePermissions, false, false).get();
+			muted.update("Muted", new Color(0), false, rolePermissions, false).get();
 
 			muted = CommandUtils.getMutedRole(server);
 		}

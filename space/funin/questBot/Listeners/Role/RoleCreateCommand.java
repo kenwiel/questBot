@@ -31,7 +31,7 @@ public class RoleCreateCommand implements CommandExecutor {
 		for(String s : args) {
 			Role r = server.createRole().get();
 			Permissions permissions = api.getPermissionsBuilder().build();
-			r.update(s, new Color(0), false, permissions, false, true).get();
+			r.update(s, new Color(0), false, permissions, true).get();
 			sb.append("Created Role: " + r.getMentionTag() + "\n");
 		}
 		

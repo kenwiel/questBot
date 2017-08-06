@@ -24,6 +24,9 @@ public class Settings {
 	private static Map<String, Quest> roleQuestMap = new HashMap<String, Quest>();
 	private static Logger logger = LoggerFactory.getLogger(Settings.class);
 
+
+
+	
 	public static String loadToken() {
 		File tokenFile = new File(directory + "token");
 		if (tokenFile.exists()) {
@@ -95,8 +98,7 @@ public class Settings {
 				file.delete();
 			}
 		}
-	}
-
+	}	
 	public static void saveMap(Map<String, Quest> roleQuestMap) {
 		Gson gson = new Gson();
 		String questID = "";
