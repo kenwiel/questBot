@@ -27,6 +27,8 @@ public class RoleListCommand implements CommandExecutor {
             for (Quest q : Settings.getMap().values()) {
             	if(q.isValid(server, channel)) {
                 	eb.addField(q.getName(), QuestBot.getRole(q.getRole(), server).getName(), true);
+            	} else {
+            		Settings.deleteQuest(q.getRole());
             	}
             }
             channel.sendMessage("", eb);
