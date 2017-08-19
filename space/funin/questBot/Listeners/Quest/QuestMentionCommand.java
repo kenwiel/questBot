@@ -69,7 +69,7 @@ public class QuestMentionCommand {
 		for(Thread t : threadList) {
 			String subject = t.OriginalPost.subject();
 			//System.out.print(subject + " : " + subject.toLowerCase().contains(questName.toLowerCase())+"\n");
-			if (subject.toLowerCase().contains(questName.toLowerCase())) {
+			if (StringEscapeUtils.unescapeHtml3(t.OriginalPost.subject()).toLowerCase().contains(questName.toLowerCase())) {
 				fittingThreads.put(t.getID(), t);
 				System.out.println(t.getID() + " : " + subject);
 			}
