@@ -2,6 +2,7 @@ package space.funin.questBot.Listeners.Channel;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import de.btobastian.javacord.entities.Channel;
 import de.btobastian.javacord.entities.Server;
@@ -30,6 +31,10 @@ public class ChannelListUserCommand implements CommandExecutor {
 	}
 
 	private boolean hasReadPermission(Server server, Channel channel, User user) {
+		if (isAdmin(server, user)) {
+			return true;
+		}
+		
 		PermissionState everyonePerms = channel.getServer().getRoleById(channel.getServer().getId()).getPermissions()
 				.getState(PermissionType.READ_MESSAGES);
 		PermissionState everyoneChannelPerms = channelReadPermissionEveryone(channel);
@@ -74,10 +79,24 @@ public class ChannelListUserCommand implements CommandExecutor {
 		}
 	}
 
-	private PermissionState channelReadPermission(Channel channel, Role role) {
-		if (role.getPermissions().getState(PermissionType.ADMINISTRATOR).equals(PermissionState.ALLOWED)) {
-			return PermissionState.ALLOWED;
+	private boolean isAdmin(Server server, User user) {
+		try {
+			if (server.getOwner().get().equals(user)) {
+				return true;
+			}
+		} catch (InterruptedException | ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		for (Role r : user.getRoles(server)) {
+			if (r.getPermissions().getState(PermissionType.ADMINISTRATOR).equals(PermissionState.ALLOWED)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private PermissionState channelReadPermission(Channel channel, Role role) {
 		return channel.getOverwrittenPermissions(role).getState(PermissionType.READ_MESSAGES);
 	}
 
