@@ -23,6 +23,7 @@ import space.funin.questBot.Listeners.NonCommandListener;
 import space.funin.questBot.Listeners.Bot.BotAddResponseCommand;
 import space.funin.questBot.Listeners.Bot.BotInfoCommand;
 import space.funin.questBot.Listeners.Bot.BotSettingsCommand;
+import space.funin.questBot.Listeners.Channel.ChannelListUserCommand;
 import space.funin.questBot.Listeners.Commands.CommandsAliasCommand;
 import space.funin.questBot.Listeners.Commands.CommandsHelpCommand;
 import space.funin.questBot.Listeners.Message.MessagePurgeCommand;
@@ -89,6 +90,8 @@ public class QuestBot {
 								
 				commandHandler.registerCommand(new ServerSetupMuteCommand(api));
 
+				commandHandler.registerCommand(new ChannelListUserCommand());
+				
 				commandHandler.registerCommand(new UserMuteCommand(executor, api));
 				commandHandler.registerCommand(new UserUnmuteCommand(executor, api));
 
