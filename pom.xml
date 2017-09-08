@@ -59,7 +59,7 @@
   		<dependency>
 			<groupId>de.btobastian.javacord</groupId>
 			<artifactId>javacord</artifactId>
-			<version>2.0.16</version>
+			<version>2.0.17</version>
 			<classifier>shaded</classifier>
 		</dependency>
 		<!-- A SLF4J comaptible logging framework. I would recommend to use logback -->

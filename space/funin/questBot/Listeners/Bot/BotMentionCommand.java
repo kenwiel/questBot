@@ -9,6 +9,7 @@ import space.funin.questBot.Settings;
 public class BotMentionCommand {
 	public static void onBotMention(String[] args, Channel channel) {
 		Integer responseNo = null;
+		boolean responseOutOfBounds = false;
 		Random random = new Random();
 		List<String> responseList = Settings.loadMentionResponses();
 
@@ -21,11 +22,16 @@ public class BotMentionCommand {
 				}
 			}
 		}
-		if (responseNo == null || responseNo < 0 || responseNo >= Settings.loadMentionResponses().size())
+		if (responseNo == null) {
 			responseNo = random.nextInt(responseList.size());
-
-		
-		
+		} else {
+			if (responseNo < 0 || responseNo >= Settings.loadMentionResponses().size()) {
+				responseNo = random.nextInt(responseList.size());
+				responseOutOfBounds = true;
+			}
+		}
+		if (responseOutOfBounds)
+			channel.sendMessage("Only " + (Settings.loadMentionResponses().size() - 1) + " responses available.");
 		channel.sendMessage(responseList.get(responseNo));
 	}
 }

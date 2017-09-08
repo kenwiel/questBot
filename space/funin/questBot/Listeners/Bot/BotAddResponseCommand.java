@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import de.btobastian.javacord.entities.Channel;
+import de.btobastian.javacord.entities.User;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import space.funin.questBot.CommandResponses;
@@ -12,7 +13,9 @@ import space.funin.questBot.Settings;
 public class BotAddResponseCommand implements CommandExecutor {
 	
 	@Command(aliases = { "!!addResponse", "!!ar" }, description = "Adds a response to the bots auto responder", usage = "!!addResponse [response]")
-	public void onAddResponseCommand(String[] args, Channel channel) throws InterruptedException, ExecutionException {
+	public void onAddResponseCommand(String[] args, Channel channel, User user) throws InterruptedException, ExecutionException {
+		if (user.isBot())
+			return;
 		StringBuilder sb = new StringBuilder();
 		for (String s : args) {
 			sb.append(s).append(" ");

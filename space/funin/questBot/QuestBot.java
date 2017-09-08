@@ -26,6 +26,7 @@ import space.funin.questBot.Listeners.Bot.BotSettingsCommand;
 import space.funin.questBot.Listeners.Commands.CommandsAliasCommand;
 import space.funin.questBot.Listeners.Commands.CommandsHelpCommand;
 import space.funin.questBot.Listeners.Message.MessagePurgeCommand;
+import space.funin.questBot.Listeners.Message.MessageQuoteCommand;
 import space.funin.questBot.Listeners.Quest.QuestCacheCommand;
 import space.funin.questBot.Listeners.Quest.QuestCreateCommand;
 import space.funin.questBot.Listeners.Quest.QuestDeleteCommand;
@@ -73,8 +74,9 @@ public class QuestBot {
 				
 				commandHandler.registerCommand(new CommandsAliasCommand(commandHandler));
 				commandHandler.registerCommand(new CommandsHelpCommand(commandHandler));
-				
+
 				commandHandler.registerCommand(new MessagePurgeCommand());
+				commandHandler.registerCommand(new MessageQuoteCommand());
 				
 				commandHandler.registerCommand(new QuestCacheCommand());
 				commandHandler.registerCommand(new QuestCreateCommand());

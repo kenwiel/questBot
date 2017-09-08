@@ -15,6 +15,11 @@ public class NonCommandListener implements MessageCreateListener {
 		final User user = message.getAuthor();
 		final String[] args = getArgs(message);
 
+		//if they use brackets when using the command, call them retarded
+		if (message.getContent().matches("!!.+\\s[<\\[].+")) {
+			message.reply("RTFM: !!help");
+		}
+		
 		if (user.equals(api.getYourself()))
 			return;
 
