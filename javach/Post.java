@@ -34,7 +34,7 @@ public class Post { //represents a 4chan post
         return (int) (long) data.get("tim");
     }
     public boolean isOP(){ //checks if the post is the OP of the thread
-        return thread.OriginalPost.equals(this);
+        return thread.getOP().equals(this);
     }
     public String trip(){ //returns tripcode of poster. may be null
         return (String) data.get("trip");
