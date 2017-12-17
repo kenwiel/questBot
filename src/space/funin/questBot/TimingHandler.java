@@ -3,10 +3,9 @@ package space.funin.questBot;
 import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
 import space.funin.questBot.Runnables.CleanMap;
-import space.funin.questBot.Runnables.Unmute;
+import space.funin.questBot.Runnables.UnMute;
 
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
@@ -15,26 +14,35 @@ import java.util.concurrent.TimeUnit;
 
 public class TimingHandler {
     private ScheduledThreadPoolExecutor executor;
-    private Map<User, ScheduledFuture> unmuteMap = new HashMap<>();
+    private Map<Server, Map<User, ScheduledFuture>> unMuteMap = new HashMap<>();
 
     public TimingHandler() {
         executor = new ScheduledThreadPoolExecutor(5);
         executor.setRemoveOnCancelPolicy(true);
 
-        //every minute: remove completed futures from the map
-        executor.scheduleWithFixedDelay(new CleanMap(unmuteMap), 0, 60, TimeUnit.SECONDS);
 
+        //every minute: remove completed futures from the map
+        executor.scheduleWithFixedDelay(new CleanMap(unMuteMap), 0, 60, TimeUnit.SECONDS);
     }
 
-    public void scheduleUnmute(Server server, User user, LocalDateTime time) {
-        long delay = Duration.between(LocalDateTime.now(), time).getSeconds();
-        ScheduledFuture future = executor.schedule(new Unmute(server, user), delay, TimeUnit.SECONDS);
+    public void scheduleUnmute(Server server, User user, Duration duration) {
+        scheduleUnmute(server, user, duration.getSeconds());
+    }
 
-        if(unmuteMap.containsKey(user)) {
-            unmuteMap.get(user).cancel(false);
-            unmuteMap.replace(user, future);
+    public void scheduleUnmute(Server server, User user, long duration) {
+        ScheduledFuture future = executor.schedule(new UnMute(server, user), duration, TimeUnit.SECONDS);
+
+        //if it doesnt exist yet, create it
+        if(!unMuteMap.containsKey(server)) {
+            unMuteMap.put(server, new HashMap<>());
+        }
+
+        Map<User, ScheduledFuture> innerMap = unMuteMap.get(server);
+        if(innerMap.containsKey(user)) {
+            innerMap.get(user).cancel(false);
+            innerMap.replace(user, future);
             return;
         }
-        unmuteMap.put(user, future);
+        innerMap.put(user, future);
     }
 }

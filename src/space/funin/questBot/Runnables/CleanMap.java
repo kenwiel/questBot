@@ -1,23 +1,26 @@
 package space.funin.questBot.Runnables;
 
+import de.btobastian.javacord.entities.Server;
+import de.btobastian.javacord.entities.User;
+
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.stream.Collectors;
 
 public class CleanMap implements Runnable {
-    private Map<?, ScheduledFuture> toClean;
+    private Map<Server, Map<User, ScheduledFuture>> toClean;
 
-    public CleanMap(Map<?, ScheduledFuture> toClean) {
+    public CleanMap(Map<Server, Map<User, ScheduledFuture>> toClean) {
         this.toClean = toClean;
     }
 
     @Override
     public void run() {
-        List<?> toRemove = toClean.entrySet().stream()
-                .filter(userScheduledFutureEntry -> userScheduledFutureEntry.getValue().isDone()) //only entries that return true for isDone
-                .map(Map.Entry::getKey).collect(Collectors.toList()); //make a list of the keys of those entries
-
-        toRemove.forEach(toClean::remove);
+        //go through each server
+        for (Map<User, ScheduledFuture> entry : toClean.values()) {
+            //for each ScheduledFuture, remove it from the inner map if it is done.
+            entry.entrySet().removeIf(userScheduledFutureEntry -> userScheduledFutureEntry.getValue().isDone());
+        }
     }
 }
