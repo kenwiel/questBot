@@ -10,8 +10,6 @@ import javach.Post;
 import space.funin.questBot.Helper;
 import space.funin.questBot.QuestBot;
 
-import java.util.LinkedList;
-import java.util.List;
 import java.util.ListIterator;
 import java.util.concurrent.ExecutionException;
 
