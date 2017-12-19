@@ -15,7 +15,7 @@ public class QuestHelper {
     }
 
     public static Thread getThreadBySubject(String subject) {
-        List<Thread> threadList = QuestBot.qst.getCachedThreads();
+        List<Thread> threadList = QuestBot.getQst().getCachedThreads();
 
         threadList = threadList.stream().filter(thread -> thread.getOP().subject().contains(subject)).collect(Collectors.toList());
         threadList.forEach(thread -> System.out.println(thread.getID()));
