@@ -1,6 +1,6 @@
 package space.funin.questBot.Quests;
 
-public enum QuestProperties {
+public enum QuestProperty {
     Name,
     SearchString,
     Description,
