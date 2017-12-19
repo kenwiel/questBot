@@ -33,7 +33,7 @@ public class Quest {
     }
 
     public String getSearchString() {
-        return searchString;
+        return searchString != null ? searchString : name;
     }
 
     public void setSearchString(String searchString) {
