@@ -22,7 +22,7 @@ public class BrowseQst implements CommandExecutor {
     public void onCall(Server server, ServerTextChannel channel, String[] args) {
         int threadId = Integer.parseInt(args[0]);
 
-        javach.Thread thread = QuestBot.qst.getThread(threadId, true);
+        javach.Thread thread = QuestBot.getQst().getThread(threadId, true);
         ListIterator<Post> iterator = thread.getPosts().listIterator();
 
         try {

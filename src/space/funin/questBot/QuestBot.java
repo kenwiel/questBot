@@ -15,20 +15,30 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class QuestBot {
-    public static TimingHandler timingHandler = new TimingHandler();
-    public static Collection<Server> servers;
-    public static Board.specBoard qst;
+    private static TimingHandler timingHandler = new TimingHandler();
+    private static Collection<Server> servers;
+    private static Board.specBoard qst;
 
     public static void main(String[] args) {
         if (args.length != 1) {
             return;
         }
-        new QuestBot(args[0]).testUpdateTime();
+        new QuestBot(args[0]);
 
     }
 
     public QuestBot(String token) {
-/*
+        setupQst();
+        connect(token);
+    }
+
+    private void setupQst() {
+        qst = new Board.specBoard("qst");
+        timingHandler.scheduleCacheUpdate();
+    }
+
+    private void connect(String token) {
+
         new DiscordApiBuilder().setToken(token).setAccountType(AccountType.BOT).login().whenComplete(
                 (api, throwable) -> {
                     if (throwable != null) { //Login failed
@@ -49,24 +59,21 @@ public class QuestBot {
 
                     QuestHandler questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
                 });
-
-*/
     }
 
-    private void testUpdateTime() {
-        qst = new Board.specBoard("qst");
-        LocalDateTime time = LocalDateTime.now();
-        qst.getAllThreads();
-        Duration duration = Duration.between(time, LocalDateTime.now());
-        System.out.println(duration.getSeconds());
+    public static TimingHandler getTimingHandler() {
+        return timingHandler;
+    }
 
-        for (int i = 0; i < 30; i++) {
-            time = LocalDateTime.now();
-            qst.getAllThreads();
-            duration = Duration.between(time, LocalDateTime.now());
-            System.out.println(duration.getSeconds());
-        }
+    public static Collection<Server> getServers() {
+        return servers;
+    }
 
-        //60s
+    public static Board.specBoard getQst() {
+        return qst;
+    }
+
+    public static void setQst(Board.specBoard updatedQst) {
+        qst = updatedQst;
     }
 }

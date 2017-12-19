@@ -6,12 +6,6 @@ import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.permissions.Role;
 import space.funin.questBot.Exceptions.RoleAlreadyPresentException;
 
-import javax.xml.transform.*;
-import javax.xml.transform.stream.StreamResult;
-import javax.xml.transform.stream.StreamSource;
-import java.io.File;
-import java.io.StringReader;
-import java.io.StringWriter;
 import java.time.Duration;
 import java.time.format.DateTimeParseException;
 import java.util.Collection;

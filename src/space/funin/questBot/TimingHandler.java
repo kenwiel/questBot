@@ -4,6 +4,7 @@ import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
 import space.funin.questBot.Runnables.CleanMap;
 import space.funin.questBot.Runnables.UnMute;
+import space.funin.questBot.Runnables.UpdateCache;
 
 import java.time.Duration;
 import java.util.HashMap;
@@ -23,6 +24,10 @@ public class TimingHandler {
 
         //every minute: remove completed futures from the map
         executor.scheduleWithFixedDelay(new CleanMap(unMuteMap), 0, 60, TimeUnit.SECONDS);
+    }
+
+    public void scheduleCacheUpdate() {
+        executor.scheduleAtFixedRate(new UpdateCache(), 0, 60, TimeUnit.SECONDS);
     }
 
     public void scheduleUnmute(Server server, User user, Duration duration) {

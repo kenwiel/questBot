@@ -39,7 +39,7 @@ public class Mute implements CommandExecutor {
                     //doesnt matter
                 }
                 sb.append(user.getDisplayName(server)).append(", ");
-                QuestBot.timingHandler.scheduleUnmute(server, user, muteDuration);
+                QuestBot.getTimingHandler().scheduleUnmute(server, user, muteDuration);
             });
             sb.replace(sb.lastIndexOf(", "), sb.length(), "");
             channel.sendMessage(sb.toString());
