@@ -56,6 +56,7 @@ public class QuestBot {
                     commandHandler.registerCommand(new Time());
                     commandHandler.registerCommand(new Mute());
                     commandHandler.registerCommand(new BrowseQst());
+                    commandHandler.registerCommand(new QuestAdd());
 
                     QuestHandler questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
                 });

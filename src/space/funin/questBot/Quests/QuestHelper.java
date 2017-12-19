@@ -114,7 +114,8 @@ public class QuestHelper {
                         break;
                     case Role:
                         //role mentions MUST be the role belonging to the quest, as no other property takes a role as argument
-                        mapping.put(questProperty, message.getMentionedRoles());
+                        //take only index 0, there shouldnt be more than one anyways
+                        mapping.put(questProperty, message.getMentionedRoles().get(0));
                         break;
                 }
             }
