@@ -3,10 +3,11 @@ package javach;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-public class Thread { //represents a 4chan thread
+public class Thread implements Comparable<Thread> { //represents a 4chan thread
     
     private JSONArray posts; //array of posts
     private LinkedList<Post> postCache = new LinkedList<>();    //cache of Post objects
@@ -207,8 +208,14 @@ public class Thread { //represents a 4chan thread
         return thumbnames;
     }
 
+    @Override
+    public int compareTo(@NotNull Thread comparesTo) {
+        int comparison = (int) ((Thread)comparesTo).getID();
 
-    public List<Post> getPosts() {
+        return comparison - (int)this.id;
+    }
+
+    public LinkedList<Post> getPosts() {
         return postCache;
     }
     
