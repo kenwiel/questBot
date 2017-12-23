@@ -17,7 +17,7 @@ public class Conga  implements CommandExecutor {
     private static String bottomRight = "<a:congaparrot:394097280292093953>";
 
     @Command(aliases = {"conga"}, async = true)
-    public void onCall(Server server, ServerTextChannel channel) {
+    public void onCall(ServerTextChannel channel) {
         try {
             channel.sendMessage(topLeft + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topRight).get();
             channel.sendMessage(bottomLeft + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomRight).get();
