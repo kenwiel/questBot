@@ -15,13 +15,12 @@ public class Quest {
 
 
     private Quest(QuestBuilder builder) {
-        this.name = builder.name;
-        this.searchString = builder.searchString;
-        this.description = builder.description;
-        this.archive = builder.archive;
+        this.name = builder.name.trim();
+        this.searchString = builder.searchString != null ? builder.searchString.trim() : builder.name.trim();
+        this.description = builder.description != null ? builder.description.trim() : "No description provided";
+        this.archive = builder.archive != null ? builder.archive.trim() : "No archive provided.";
         this.authors = builder.authors;
         this.role = builder.role;
-
     }
 
     public String getName() {

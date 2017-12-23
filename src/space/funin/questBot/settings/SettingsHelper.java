@@ -1,7 +1,6 @@
 package space.funin.questBot.settings;
 
 import com.sun.istack.internal.Nullable;
-import org.apache.commons.codec.Charsets;
 
 import java.io.IOException;
 import java.nio.charset.Charset;
@@ -14,7 +13,7 @@ import java.util.Optional;
  * This class handles saving and loading of all SettingsHelper for the bot.
  */
 public class SettingsHelper {
-    private static final  Charset DEFAULT_ENCODING = Charsets.UTF_8;
+    private static final  Charset DEFAULT_ENCODING = Charset.forName("UTF-8");
 
     /**
      * This method reads the contents of a file.

@@ -6,7 +6,9 @@ import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
+import space.funin.questBot.QuestBot;
 import space.funin.questBot.Quests.Quest;
+import space.funin.questBot.Quests.QuestHandler;
 import space.funin.questBot.Quests.QuestHelper;
 import space.funin.questBot.Quests.QuestProperty;
 
@@ -33,5 +35,6 @@ public class QuestAdd implements CommandExecutor {
                 .build();
 
         QuestHelper.linkThread(quest, channel);
+        QuestBot.getQuestHandler().registerQuest(quest);
     }
 }

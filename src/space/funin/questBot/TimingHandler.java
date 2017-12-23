@@ -27,7 +27,7 @@ public class TimingHandler {
     }
 
     public void scheduleCacheUpdate() {
-        executor.scheduleAtFixedRate(new UpdateCache(), 0, 60, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(new UpdateCache(), 0, 30, TimeUnit.SECONDS);
     }
 
     public void scheduleUnmute(Server server, User user, Duration duration) {

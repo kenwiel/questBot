@@ -1,23 +1,23 @@
 package space.funin.questBot;
 
 import de.btobastian.javacord.AccountType;
+import de.btobastian.javacord.DiscordApi;
 import de.btobastian.javacord.DiscordApiBuilder;
 import de.btobastian.javacord.entities.Server;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import javach.Board;
 import space.funin.questBot.Quests.QuestHandler;
-import space.funin.questBot.Quests.QuestHelper;
 import space.funin.questBot.commands.*;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
 import java.util.Collection;
 
 public class QuestBot {
     private static TimingHandler timingHandler = new TimingHandler();
     private static Collection<Server> servers;
     private static Board.specBoard qst;
+    private static DiscordApi api;
+    private static QuestHandler questHandler;
 
     public static void main(String[] args) {
         if (args.length != 1) {
@@ -28,13 +28,15 @@ public class QuestBot {
     }
 
     public QuestBot(String token) {
-        setupQst();
         connect(token);
+        setupQst();
     }
 
     private void setupQst() {
         qst = new Board.specBoard("qst");
+        qst.refreshCache();
         timingHandler.scheduleCacheUpdate();
+        System.out.println("updated cache");
     }
 
     private void connect(String token) {
@@ -45,8 +47,8 @@ public class QuestBot {
                         throwable.printStackTrace();
                         return;
                     }
+                    QuestBot.api = api;
                     servers = api.getServers();
-
 
                     //Login successful
 
@@ -57,8 +59,9 @@ public class QuestBot {
                     commandHandler.registerCommand(new Mute());
                     commandHandler.registerCommand(new BrowseQst());
                     commandHandler.registerCommand(new QuestAdd());
+                    commandHandler.registerCommand(new Conga());
 
-                    QuestHandler questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
+                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
                 });
     }
 
@@ -76,5 +79,13 @@ public class QuestBot {
 
     public static void setQst(Board.specBoard updatedQst) {
         qst = updatedQst;
+    }
+
+    public static DiscordApi getApi() {
+        return api;
+    }
+
+    public static QuestHandler getQuestHandler() {
+        return questHandler;
     }
 }

@@ -1,15 +1,14 @@
 package space.funin.questBot.Quests;
 
+import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import javach.Thread;
+import space.funin.questBot.Helper;
 import space.funin.questBot.QuestBot;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class QuestHelper {
@@ -20,7 +19,10 @@ public class QuestHelper {
      * @param channel the channel to send to
      */
     public static void linkThread(Quest quest, ServerTextChannel channel) {
-        channel.sendMessage(embedQuest(quest));
+        EmbedBuilder eb = embedQuestThread(quest);
+        if (eb == null)
+            channel.sendMessage("Unable to find thread");
+        channel.sendMessage(eb);
     }
 
     /**
@@ -28,14 +30,39 @@ public class QuestHelper {
      * @param quest the quest to represent
      * @return an embed representation of the quest
      */
-    public static EmbedBuilder embedQuest(Quest quest) {
-        Thread thread = getThreadBySubject(quest.getSearchString());
-
+    public static EmbedBuilder embedQuestThread(Quest quest) {
+        Optional<Thread> thread = getThreadBySubject(quest.getSearchString());
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setAuthor(thread.getOP().getPosterName())
-                .setThumbnail(thread.getOP().getFile().url())
-                .setTitle(thread.getOP().subject())
-                .setUrl(thread.url());
+        thread.ifPresent(realThread -> {
+
+            String content = Helper.replaceHtmlWithMarkdown(realThread.getOP().getText());
+            content = content.substring(0, content.indexOf('\n', 250)) + "\n\n...";
+
+            eb.setAuthor(realThread.getOP().getPosterName())
+                    .setThumbnail(realThread.getOP().getFile().url())
+                    .setTitle(realThread.getOP().subject())
+                    .setUrl(realThread.url())
+                    .setDescription(content)
+                    .setFooter(quest.getArchive());
+        });
+        if (thread.isPresent())
+            return eb;
+
+        return null;
+    }
+
+    public static EmbedBuilder embedQuest(Quest quest, Server server) {
+        List<String> authors = quest.getAuthors().stream().map(user -> user.getDisplayName(server)).collect(Collectors.toList());
+        String authorString = "";
+        for (String s : authors) {
+            authorString += s + " ";
+        }
+
+        EmbedBuilder eb = new EmbedBuilder()
+                .setAuthor(authorString)
+                .setTitle(quest.getName())
+                .setDescription(quest.getDescription())
+                .setFooter(quest.getArchive());
 
         return eb;
     }
@@ -45,13 +72,16 @@ public class QuestHelper {
      * @param subject the subject to look for
      * @return the newest thread with that subject
      */
-    public static Thread getThreadBySubject(String subject) {
+    public static Optional<Thread> getThreadBySubject(String subject) {
         List<Thread> threadList = QuestBot.getQst().getCachedThreads();
 
-        threadList = threadList.stream().filter(thread -> thread.getOP().subject().contains(subject)).collect(Collectors.toList());
+        threadList = threadList.stream().filter(thread -> thread.getOP().subject().toLowerCase().contains(subject)).collect(Collectors.toList());
         Collections.sort(threadList);
 
-        return threadList.get(0);
+        if (threadList.size() == 0)
+            return Optional.empty();
+
+        return Optional.of(threadList.get(0));
     }
 
     /**
