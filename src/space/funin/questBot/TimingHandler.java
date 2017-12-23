@@ -21,12 +21,13 @@ public class TimingHandler {
         executor = new ScheduledThreadPoolExecutor(5);
         executor.setRemoveOnCancelPolicy(true);
 
-
         //every minute: remove completed futures from the map
         executor.scheduleWithFixedDelay(new CleanMap(unMuteMap), 0, 60, TimeUnit.SECONDS);
     }
 
     public void scheduleCacheUpdate() {
+        executor.scheduleAtFixedRate(() -> System.out.println(QuestBot.getQst().cache.size()), 0, 5, TimeUnit.SECONDS);
+        QuestBot.getQst().refreshCache();
         executor.scheduleAtFixedRate(new UpdateCache(), 0, 30, TimeUnit.SECONDS);
     }
 

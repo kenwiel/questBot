@@ -34,9 +34,7 @@ public class QuestBot {
 
     private void setupQst() {
         qst = new Board.specBoard("qst");
-        qst.refreshCache();
         timingHandler.scheduleCacheUpdate();
-        System.out.println("updated cache");
     }
 
     private void connect(String token) {
@@ -54,14 +52,17 @@ public class QuestBot {
 
                     CommandHandler commandHandler = new JavacordHandler(api);
                     commandHandler.setDefaultPrefix("!!");
+                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
+
                     commandHandler.registerCommand(new PingPong());
                     commandHandler.registerCommand(new Time());
                     commandHandler.registerCommand(new Mute());
                     commandHandler.registerCommand(new BrowseQst());
                     commandHandler.registerCommand(new QuestAdd());
                     commandHandler.registerCommand(new Conga());
+                    commandHandler.registerCommand(new OutputQuest(questHandler));
 
-                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
+
                 });
     }
 

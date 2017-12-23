@@ -5,6 +5,7 @@ import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import javach.Thread;
+import org.apache.commons.lang3.StringEscapeUtils;
 import space.funin.questBot.Helper;
 import space.funin.questBot.QuestBot;
 
@@ -36,11 +37,14 @@ public class QuestHelper {
         thread.ifPresent(realThread -> {
 
             String content = Helper.replaceHtmlWithMarkdown(realThread.getOP().getText());
-            content = content.substring(0, content.indexOf('\n', 250)) + "\n\n...";
+            try {
+                content = content.substring(0, content.indexOf('\n', 250)) + "\n\n...";
+            } catch (StringIndexOutOfBoundsException ignored) {}
+
 
             eb.setAuthor(realThread.getOP().getPosterName())
                     .setThumbnail(realThread.getOP().getFile().url())
-                    .setTitle(realThread.getOP().subject())
+                    .setTitle(StringEscapeUtils.unescapeHtml3(realThread.getOP().subject()))
                     .setUrl(realThread.url())
                     .setDescription(content)
                     .setFooter(quest.getArchive());
@@ -75,7 +79,12 @@ public class QuestHelper {
     public static Optional<Thread> getThreadBySubject(String subject) {
         List<Thread> threadList = QuestBot.getQst().getCachedThreads();
 
-        threadList = threadList.stream().filter(thread -> thread.getOP().subject().toLowerCase().contains(subject)).collect(Collectors.toList());
+        threadList = threadList.stream().filter(thread -> {
+                    if(thread.getOP().subject() == null) {
+                        return false;
+                    }
+                    return StringEscapeUtils.unescapeHtml3(thread.getOP().subject()).toLowerCase().contains(subject.toLowerCase());
+                }).collect(Collectors.toList());
         Collections.sort(threadList);
 
         if (threadList.size() == 0)
@@ -135,7 +144,7 @@ public class QuestHelper {
                     case SearchString:
                     case Description:
                     case Archive:
-                        String value = partialInput.replace(property + " ", "");
+                        String value = partialInput.replaceFirst(property + " ", "");
                         mapping.put(questProperty, value);
                         break;
                     case Authors:

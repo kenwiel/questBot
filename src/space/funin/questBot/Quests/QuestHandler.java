@@ -68,4 +68,8 @@ public class QuestHandler {
     public void removeQuest(Quest quest) {
         questList.remove(quest);
     }
+
+    public Optional<Quest> getQuestByRole(Role role) {
+        return questList.stream().filter(quest -> quest.getRole().equals(role)).findAny();
+    }
 }
