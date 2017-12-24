@@ -20,11 +20,13 @@ public class QuestAdd implements CommandExecutor {
     @Command(aliases = {"addQuest"}, async = true)
     @SuppressWarnings("unchecked")
     public void onCall(Message message, ServerTextChannel channel) {
+        System.out.println("in");
+
         //remove command from input
         String input = message.getContent().replaceFirst("../addquest/i", "");
         Map<QuestProperty, Object> mapping = QuestHelper.parseQuestString(input, message);
 
-        //unchecked casts dont matter, QuestHelper#parseQuestString makes sure the correct values are in th map
+        //unchecked casts dont matter, QuestHelper#parseQuestString makes sure the correct values are in the map
         Quest quest = new Quest.QuestBuilder(
                 (String) mapping.get(QuestProperty.Name),
                 (List<User>) mapping.get(QuestProperty.Authors),

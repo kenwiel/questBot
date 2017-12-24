@@ -18,6 +18,7 @@ public class Conga  implements CommandExecutor {
 
     @Command(aliases = {"conga"}, async = true)
     public void onCall(ServerTextChannel channel) {
+        System.out.println("entered conga line");
         try {
             channel.sendMessage(topLeft + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topRight).get();
             channel.sendMessage(bottomLeft + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomRight).get();

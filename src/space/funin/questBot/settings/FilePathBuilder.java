@@ -1,6 +1,7 @@
 package space.funin.questBot.settings;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.Optional;
 
 /**
@@ -28,12 +29,12 @@ public class FilePathBuilder {
     }
 
     /**
-     * Turns the builder into a Path object.
+     * Turns the builder into a File object.
      * Returns an empty Optional if not all values have been set.
      *
      * @return The path object.
      */
-    public Optional<File> toPath() {
+    public File toFile() {
         File filePath = null;
         switch (pathType) {
             case QUEST:
@@ -47,7 +48,11 @@ public class FilePathBuilder {
                 }
                 break;
         }
-        return Optional.ofNullable(filePath);
+        return filePath;
+    }
+
+    public Path toPath() {
+        return toFile().toPath();
     }
 
     /**

@@ -54,15 +54,15 @@ public class QuestBot {
                     commandHandler.setDefaultPrefix("!!");
                     questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
 
+                    commandHandler.registerCommand(new QuestAdd());
                     commandHandler.registerCommand(new PingPong());
                     commandHandler.registerCommand(new Time());
                     commandHandler.registerCommand(new Mute());
                     commandHandler.registerCommand(new BrowseQst());
-                    commandHandler.registerCommand(new QuestAdd());
                     commandHandler.registerCommand(new Conga());
                     commandHandler.registerCommand(new OutputQuest(questHandler));
 
-
+                    System.out.println("all registered");
                 });
     }
 
