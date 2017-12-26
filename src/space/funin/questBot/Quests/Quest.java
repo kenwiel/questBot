@@ -111,7 +111,10 @@ public class Quest {
             return this;
         }
 
-        public Quest build() {
+        public Quest build() throws IllegalArgumentException {
+            if (name == null || authors == null || role == null)
+                throw new IllegalArgumentException("Missing at least one required argument. Please double check your input.");
+
             return new Quest(this);
         }
     }

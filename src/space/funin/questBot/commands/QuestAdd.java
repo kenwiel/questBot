@@ -26,17 +26,21 @@ public class QuestAdd implements CommandExecutor {
         String input = message.getContent().replaceFirst("../addquest/i", "");
         Map<QuestProperty, Object> mapping = QuestHelper.parseQuestString(input, message);
 
-        //unchecked casts dont matter, QuestHelper#parseQuestString makes sure the correct values are in the map
-        Quest quest = new Quest.QuestBuilder(
-                (String) mapping.get(QuestProperty.Name),
-                (List<User>) mapping.get(QuestProperty.Authors),
-                (Role) mapping.get(QuestProperty.Role))
-                .setArchive((String) mapping.get(QuestProperty.Archive))
-                .setDescription((String) mapping.get(QuestProperty.Description))
-                .setSearchString((String) mapping.get(QuestProperty.SearchString))
-                .build();
+        try {
+            //unchecked casts dont matter, QuestHelper#parseQuestString makes sure the correct values are in the map
+            Quest quest = new Quest.QuestBuilder(
+                    (String) mapping.get(QuestProperty.Name),
+                    (List<User>) mapping.get(QuestProperty.Authors),
+                    (Role) mapping.get(QuestProperty.Role))
+                    .setArchive((String) mapping.get(QuestProperty.Archive))
+                    .setDescription((String) mapping.get(QuestProperty.Description))
+                    .setSearchString((String) mapping.get(QuestProperty.SearchString))
+                    .build();
+            QuestHelper.linkThread(quest, channel);
+            QuestBot.getQuestHandler().registerQuest(quest);
+        } catch (IllegalArgumentException e) { //in case of missing arguments
+            channel.sendMessage(e.getMessage());
+        }
 
-        QuestHelper.linkThread(quest, channel);
-        QuestBot.getQuestHandler().registerQuest(quest);
     }
 }
