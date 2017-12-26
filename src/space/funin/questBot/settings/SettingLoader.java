@@ -32,18 +32,12 @@ public class SettingLoader {
             File file = path.toFile();
             System.out.println(path);
             if (file.getParentFile().getName().contains("questSettings")) {
-                System.out.println("contains");
                 SettingsHelper.readFile(path, null).ifPresent(json -> {
-                    System.out.println("reading");
                     Quest quest = gson.fromJson(json, Quest.class);
-                    System.out.println("reading");
                     questHandler.registerQuestInit(quest);
-                    System.out.println("reading");
-                    System.out.println("registered as quest: " + quest.getName());
                 });
             }
         });
-        System.out.println("done");
     }
 
     public void saveQuest(Quest quest) {
