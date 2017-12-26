@@ -16,6 +16,8 @@ import java.util.Optional;
  *        ┗userID                settings file
  */
 public class FilePathBuilder {
+    private static String baseDir = "settings/";
+
     //required
     private File serverDir;
     private PathType pathType;
@@ -24,7 +26,7 @@ public class FilePathBuilder {
     private String questId;
 
     public FilePathBuilder(String serverID, PathType pathType) {
-        this.serverDir = new File(serverID);
+        this.serverDir = new File(baseDir+serverID);
         this.pathType = pathType;
     }
 
@@ -93,5 +95,9 @@ public class FilePathBuilder {
         public String getFolder() {
             return folder;
         }
+    }
+
+    public static String getBaseDir() {
+        return baseDir;
     }
 }

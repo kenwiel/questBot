@@ -7,6 +7,7 @@ import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.javacord.events.message.MessageCreateEvent;
+import space.funin.questBot.QuestBot;
 import space.funin.questBot.settings.SettingLoader;
 
 import java.util.*;
@@ -16,13 +17,11 @@ public class QuestHandler {
     private Map<Long, List<Quest>> questList = new HashMap<>();
 
     private String defaultPrefix;
-    private SettingLoader settingLoader;
 
 
     public QuestHandler(DiscordApi api, String defaultPrefix) {
             this.defaultPrefix = defaultPrefix;
             api.addMessageCreateListener(this::handleMessageCreate);
-            settingLoader = new SettingLoader(this);
     }
 
     private  void handleMessageCreate(MessageCreateEvent event) {
@@ -72,7 +71,19 @@ public class QuestHandler {
 
         questList.get(quest.getRole().getServer().getId()).add(quest);
 
-        settingLoader.saveQuest(quest);
+        QuestBot.getSettingLoader().saveQuest(quest);
+        System.out.println("added a quest");
+    }
+
+    public void registerQuestInit(Quest quest) {
+        //make sure there's a list to put stuff into
+        if(!questList.containsKey(quest.getRole().getServer().getId()))
+            questList.put(quest.getRole().getServer().getId(), new ArrayList<>());
+
+        //remove potential duplicate quest
+        removeQuest(quest);
+
+        questList.get(quest.getRole().getServer().getId()).add(quest);
     }
 
     public void removeQuest(Quest quest) {

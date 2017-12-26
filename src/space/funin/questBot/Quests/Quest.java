@@ -2,16 +2,21 @@ package space.funin.questBot.Quests;
 
 import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.permissions.Role;
+import space.funin.questBot.QuestBot;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Quest {
     private String name;
     private String searchString;
     private String description;
     private String archive;
-    private List<User> authors;
-    private Role role;
+
+    private List<Long> authorIds = new ArrayList<>();
+    private Long roleId;
 
 
     private Quest(QuestBuilder builder) {
@@ -19,8 +24,18 @@ public class Quest {
         this.searchString = builder.searchString != null ? builder.searchString.trim() : builder.name.trim();
         this.description = builder.description != null ? builder.description.trim() : "No description provided";
         this.archive = builder.archive != null ? builder.archive.trim() : "No archive provided.";
-        this.authors = builder.authors;
-        this.role = builder.role;
+        setAuthorIds(builder.authors);
+        setRoleId(builder.role);
+    }
+
+    private void setAuthorIds(List<User> authors) {
+        for (User user : authors) {
+            authorIds.add(user.getId());
+        }
+    }
+
+    private void setRoleId(Role role) {
+        roleId = role.getId();
     }
 
     public String getName() {
@@ -56,19 +71,15 @@ public class Quest {
     }
 
     public List<User> getAuthors() {
-        return authors;
+        return authorIds.stream().map(id -> QuestBot.getApi().getUserById(id)).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
     }
 
     public void setAuthors(List<User> authors) {
-        this.authors = authors;
+        setAuthorIds(authors);
     }
 
     public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
+        return QuestBot.getApi().getRoleById(roleId).orElse(null);
     }
 
     public static class QuestBuilder {

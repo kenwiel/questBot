@@ -4,20 +4,26 @@ import de.btobastian.javacord.AccountType;
 import de.btobastian.javacord.DiscordApi;
 import de.btobastian.javacord.DiscordApiBuilder;
 import de.btobastian.javacord.entities.Server;
+import de.btobastian.javacord.utils.logging.LoggerUtil;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
 import javach.Board;
+import org.slf4j.Logger;
 import space.funin.questBot.Quests.QuestHandler;
 import space.funin.questBot.commands.*;
+import space.funin.questBot.settings.SettingLoader;
 
 import java.util.Collection;
 
 public class QuestBot {
+    private static final Logger logger = LoggerUtil.getLogger(QuestBot.class);
+
     private static TimingHandler timingHandler = new TimingHandler();
     private static Collection<Server> servers;
     private static Board.specBoard qst;
     private static DiscordApi api;
     private static QuestHandler questHandler;
+    private static SettingLoader settingLoader;
 
     public static void main(String[] args) {
         if (args.length != 1) {
@@ -52,7 +58,6 @@ public class QuestBot {
 
                     CommandHandler commandHandler = new JavacordHandler(api);
                     commandHandler.setDefaultPrefix("!!");
-                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
 
                     commandHandler.registerCommand(new QuestAdd());
                     commandHandler.registerCommand(new PingPong());
@@ -61,8 +66,13 @@ public class QuestBot {
                     commandHandler.registerCommand(new BrowseQst());
                     commandHandler.registerCommand(new Conga());
                     commandHandler.registerCommand(new OutputQuest(questHandler));
+                    logger.debug("Commands registered");
 
-                    System.out.println("all registered");
+                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
+                    logger.debug("QuestHandler registered");
+
+                    settingLoader = new SettingLoader(questHandler);
+                    logger.debug("Settings loaded");
                 });
     }
 
@@ -88,5 +98,9 @@ public class QuestBot {
 
     public static QuestHandler getQuestHandler() {
         return questHandler;
+    }
+
+    public static SettingLoader getSettingLoader() {
+        return settingLoader;
     }
 }
