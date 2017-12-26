@@ -26,8 +26,8 @@ public class TimingHandler {
     }
 
     public void scheduleCacheUpdate() {
-        executor.scheduleAtFixedRate(() -> System.out.println(QuestBot.getQst().cache.size()), 0, 5, TimeUnit.SECONDS);
-        QuestBot.getQst().refreshCache();
+        //TODO: remove for final build
+        QuestBot.getQst().refreshCache(); //should really be removed as accessing the cache before its fully built can fuck with it, but its a convenience thing while being a dev
         executor.scheduleAtFixedRate(new UpdateCache(), 0, 30, TimeUnit.SECONDS);
     }
 

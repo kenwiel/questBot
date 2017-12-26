@@ -8,7 +8,6 @@ import de.btobastian.javacord.entities.message.Message;
 import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.javacord.events.message.MessageCreateEvent;
 import space.funin.questBot.QuestBot;
-import space.funin.questBot.settings.SettingLoader;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -72,7 +71,6 @@ public class QuestHandler {
         questList.get(quest.getRole().getServer().getId()).add(quest);
 
         QuestBot.getSettingLoader().saveQuest(quest);
-        System.out.println("added a quest");
     }
 
     public void registerQuestInit(Quest quest) {

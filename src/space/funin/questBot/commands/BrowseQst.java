@@ -58,7 +58,7 @@ public class BrowseQst implements CommandExecutor {
 
     private EmbedBuilder postFormatter(javach.Post post) {
         EmbedBuilder eb = new EmbedBuilder();
-        String name = post.getPosterName() + " (" + post.getPosterID() + ")";
+        String name = post.getPosterName() + " (ID: " + post.getPosterID() + ")";
 
         eb.setAuthor(name, post.url(), null);
         if(post.hasFile())
