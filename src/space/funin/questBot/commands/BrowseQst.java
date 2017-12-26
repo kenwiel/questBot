@@ -50,21 +50,17 @@ public class BrowseQst implements CommandExecutor {
                         }
                         break;
                 }
-
-
             });
         } catch (InterruptedException | ExecutionException ignored) {
             //who gives a fuck
         }
-
-
-
-
     }
 
     private EmbedBuilder postFormatter(javach.Post post) {
         EmbedBuilder eb = new EmbedBuilder();
-        eb.setAuthor(post.getPosterName() + "(" + post.getPosterID() + ")" + " >>" + post.getPostID());
+        String name = post.getPosterName() + " (" + post.getPosterID() + ")";
+
+        eb.setAuthor(name, post.url(), null);
         if(post.hasFile())
             eb.setThumbnail(post.getFile().url());
         eb.setTitle(post.subject());
