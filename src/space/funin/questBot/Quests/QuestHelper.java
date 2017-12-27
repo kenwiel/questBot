@@ -115,9 +115,11 @@ public class QuestHelper {
 
             switch(property) {
                 case "name":
+                case "title":
                     questProperty = QuestProperty.Name;
                     break;
                 case "searchstring":
+                case "search":
                     questProperty = QuestProperty.SearchString;
                     break;
                 case "description":
@@ -127,7 +129,7 @@ public class QuestHelper {
                     questProperty = QuestProperty.Archive;
                     break;
                 case "authors":
-
+                case "author":
                     questProperty = QuestProperty.Authors;
                     break;
                 case "role":

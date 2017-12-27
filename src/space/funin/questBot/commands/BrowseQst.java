@@ -17,8 +17,14 @@ public class BrowseQst implements CommandExecutor {
 
     private final String leftArrow = "\u2B05";
     private final String rightArrow = "\u27A1";
+    private static final String DESCRIPTION = "Allows browsing threads on /qst/";
+    private static final String USAGE =
+            "**__!!browse__**\n\n"+
+            "__Usage:__\n"+
+            "!!browse `threadId`\n\n"+
+            "Allows browsing the thread with the given ID on /qst/";
 
-    @Command(aliases = {"browse"},  async = true)
+    @Command(aliases = {"browse"},  description = DESCRIPTION, usage = USAGE ,async = true)
     public void onCall(Server server, ServerTextChannel channel, String[] args) {
         int threadId = Integer.parseInt(args[0]);
 

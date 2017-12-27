@@ -1,0 +1,15 @@
+Manifest-Version: 1.0
+Class-Path: questBot_lib\commons-lang3-3.0.jar questBot_lib\sdcf4j-jda
+ 3-b58ded1445.jar questBot_lib\sdcf4j-core-b58ded1445.jar questBot_lib
+ \jackson-annotations-2.9.0.jar questBot_lib\json-simple-1.1.1.jar que
+ stBot_lib\nv-websocket-client-1.31.jar questBot_lib\jsoup-1.9.2.jar q
+ uestBot_lib\okio-1.13.0.jar questBot_lib\commons-io-2.5.jar questBot_
+ lib\logback-classic-1.1.3.jar questBot_lib\sdcf4j-javacord-b58ded1445
+ .jar questBot_lib\gson-2.8.0.jar questBot_lib\sdcf4j-b58ded1445.jar q
+ uestBot_lib\annotations-15.0.jar questBot_lib\slf4j-api-1.7.22.jar qu
+ estBot_lib\logback-core-1.1.3.jar questBot_lib\sdcf4j-discord4j-b58de
+ d1445.jar questBot_lib\jackson-core-2.9.2.jar questBot_lib\jackson-da
+ tabind-2.9.3.jar questBot_lib\okhttp-3.9.1.jar questBot_lib\Javacord-
+ de21543.jar questBot_lib\remark-1.0.0.jar
+Main-Class: space.funin.questBot.QuestBot
+

@@ -20,8 +20,23 @@ import java.util.Optional;
 
 public class Mute implements CommandExecutor {
 
-    @Command(aliases = {"mute"}, privateMessages = false, async = true)
-    public void onMute(Server server, Message message, ServerTextChannel channel) {
+    private static final String DESCRIPTION = "Mutes any amount of users.";
+    private static final String USAGE =
+            "**__!!mute__**\n\n"+
+            "__Usage:__\n"+
+            "!!mute `@user`\n"+
+            "!!mute `@user` `duration`\n"+
+            "!!mute `@user` `@user` `@user`\n"+
+            "!!mute `@user` `@user` `@user` `duration`\n"+
+            "!!mute `@user` 1d4h30m5s\n"+
+            "\n"+
+            "Mutes any amount of users for the given duration";
+
+    @Command(aliases = {"mute"}, description = DESCRIPTION, usage = USAGE, privateMessages = false, async = true)
+    public void onMute(User user, Server server, Message message, ServerTextChannel channel) {
+        if (!Helper.isModerator(user, server))
+            return;
+
         List<User> toMute = message.getMentionedUsers();
 
         Optional<Role> muted = server.getRoles().stream().filter(role -> role.getName().equalsIgnoreCase("muted")).findAny();
@@ -32,14 +47,14 @@ public class Mute implements CommandExecutor {
         if (muted.isPresent()) {
             StringBuilder sb = new StringBuilder().append("**").append("Muted until ").append(muteDuration.addTo(LocalDateTime.now())).append(":**").append('\n');
 
-            toMute.forEach(user -> {
+            toMute.forEach(userToMute -> {
                 try {
-                    Helper.addRole(server, user, muted.get());
+                    Helper.addRole(server, userToMute, muted.get());
                 } catch (RoleAlreadyPresentException ignored) {
                     //doesnt matter
                 }
-                sb.append(user.getDisplayName(server)).append(", ");
-                QuestBot.getTimingHandler().scheduleUnmute(server, user, muteDuration);
+                sb.append(userToMute.getDisplayName(server)).append(", ");
+                QuestBot.getTimingHandler().scheduleUnmute(server, userToMute, muteDuration);
             });
             sb.replace(sb.lastIndexOf(", "), sb.length(), "");
             channel.sendMessage(sb.toString());

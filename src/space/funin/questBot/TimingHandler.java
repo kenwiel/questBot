@@ -27,8 +27,8 @@ public class TimingHandler {
 
     public void scheduleCacheUpdate() {
         //TODO: remove for final build
-        QuestBot.getQst().refreshCache(); //should really be removed as accessing the cache before its fully built can fuck with it, but its a convenience thing while being a dev
-        executor.scheduleAtFixedRate(new UpdateCache(), 0, 30, TimeUnit.SECONDS);
+        //QuestBot.getQst().refreshCache(); //should really be removed as accessing the cache before its fully built can fuck with it, but its a convenience thing while being a dev
+        executor.scheduleAtFixedRate(new UpdateCache(), 0, 15, TimeUnit.SECONDS);
     }
 
     public void scheduleUnmute(Server server, User user, Duration duration) {

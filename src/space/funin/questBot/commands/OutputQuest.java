@@ -19,7 +19,16 @@ public class OutputQuest implements CommandExecutor {
         this.questHandler = questHandler;
     }
 
-    @Command(aliases = {"info", "qi", "questinfo", "quest"})
+    private static final String DESCRIPTION = "Outputs info about a quest.";
+    private static final String USAGE =
+            "**__!!questinfo__**\n\n"+
+            "__Usage:__\n"+
+            "!!questinfo `questRole`\n"+
+            "!!questinfo `questRole` `questRole` `questRole`\n"+
+            "\n"+
+            "Outputs detailed information about any amount of given quests";
+
+    @Command(aliases = { "questinfo", "qi", "quest"}, description = DESCRIPTION, usage = USAGE, async = true)
     public void onCall(Message message, ServerTextChannel channel, Server server) {
         for (Role r : message.getMentionedRoles()) {
             Optional<Quest> quest = questHandler.getQuestByRole(r);

@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import space.funin.questBot.Quests.QuestHandler;
 import space.funin.questBot.commands.*;
 import space.funin.questBot.settings.SettingLoader;
+import space.funin.questBot.settings.SettingsHelper;
 
 import java.util.Collection;
 
@@ -24,17 +25,19 @@ public class QuestBot {
     private static DiscordApi api;
     private static QuestHandler questHandler;
     private static SettingLoader settingLoader;
+    private static CommandHandler commandHandler;
 
     public static void main(String[] args) {
         if (args.length != 1) {
             return;
         }
-        new QuestBot(args[0]);
+
+        new QuestBot();
 
     }
 
-    public QuestBot(String token) {
-        connect(token);
+    public QuestBot() {
+        connect(SettingsHelper.loadToken());
         setupQst();
     }
 
@@ -56,20 +59,20 @@ public class QuestBot {
 
                     //Login successful
 
-                    CommandHandler commandHandler = new JavacordHandler(api);
+                    commandHandler = new JavacordHandler(api);
                     commandHandler.setDefaultPrefix("!!");
 
+                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
+                    logger.debug("QuestHandler registered");
+
                     commandHandler.registerCommand(new QuestAdd());
-                    commandHandler.registerCommand(new PingPong());
                     commandHandler.registerCommand(new Time());
                     commandHandler.registerCommand(new Mute());
                     commandHandler.registerCommand(new BrowseQst());
                     commandHandler.registerCommand(new Conga());
                     commandHandler.registerCommand(new OutputQuest(questHandler));
+                    commandHandler.registerCommand(new Help(commandHandler));
                     logger.debug("Commands registered");
-
-                    questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
-                    logger.debug("QuestHandler registered");
 
                     settingLoader = new SettingLoader(questHandler);
                     logger.debug("Settings loaded");
@@ -102,5 +105,9 @@ public class QuestBot {
 
     public static SettingLoader getSettingLoader() {
         return settingLoader;
+    }
+
+    public static CommandHandler getCommandHandler() {
+        return commandHandler;
     }
 }

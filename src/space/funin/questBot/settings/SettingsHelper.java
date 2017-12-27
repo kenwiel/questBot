@@ -1,5 +1,6 @@
 package space.funin.questBot.settings;
 
+import com.google.gson.Gson;
 import com.sun.istack.internal.Nullable;
 import org.apache.commons.io.FileUtils;
 
@@ -70,5 +71,15 @@ public class SettingsHelper {
             return false;
         }
         return true;
+    }
+
+    public static String loadToken() {
+        File tokenFile = new File("./settings/token");
+        if (tokenFile.exists()) {
+            Optional<String> token = readFile(tokenFile.toPath(), null);
+            if (token.isPresent())
+                return token.get();
+        }
+        return null;
     }
 }

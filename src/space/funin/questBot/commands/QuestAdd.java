@@ -17,7 +17,25 @@ import java.util.Map;
 
 public class QuestAdd implements CommandExecutor {
 
-    @Command(aliases = {"addQuest"}, async = true)
+    private static final String DESCRIPTION = "Registers a new quest in the bot.";
+    private static final String USAGE =
+            "**__!!addQuest__**\n\n"+
+            "__Usage:__\n"+
+            "!!addQuest --name `name` --author `@user` --role `@role`\n"+
+            "!!addQuest --name `name` --author `@user` --role `@role` --archive `archive` --description `description` --searchstring `searchstring`\n"+
+            "__Options:__\n"+
+            "*Required arguments:*\n```"+
+            "--name         The name of the quest\n"+
+            "--author       The author(s) of the quest\n"+
+            "--role         The role of the quest\n"+
+            "```*Optional arguments:*\n```"+
+            "--archive      The archive link of the quest\n"+
+            "--description  The description of the quest\n"+
+            "--searchstring The string to search for\n"+
+            "```\n"+
+            "Creates or modifies the quest with the given `@role`";
+
+    @Command(aliases = {"addQuest"},description = DESCRIPTION, usage = USAGE, async = true)
     @SuppressWarnings("unchecked")
     public void onCall(Message message, ServerTextChannel channel) {
         System.out.println("in");

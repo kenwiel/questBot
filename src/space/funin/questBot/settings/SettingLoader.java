@@ -30,7 +30,6 @@ public class SettingLoader {
         Files.walk(Paths.get(FilePathBuilder.getBaseDir())).filter(Files::isRegularFile)
                 .forEach(path -> {
             File file = path.toFile();
-            System.out.println(path);
             if (file.getParentFile().getName().contains("questSettings")) {
                 SettingsHelper.readFile(path, null).ifPresent(json -> {
                     Quest quest = gson.fromJson(json, Quest.class);

@@ -33,6 +33,19 @@ public class Helper {
     }
 
     /**
+     * Checks whether the user has a moderator role in the chosen server
+     * @param user The user to check
+     * @param server The server to check
+     * @return Whether the user has a role that contains "moderator" in its name
+     */
+    public static boolean isModerator(User user, Server server) {
+        Collection<Role> userRoles = user.getRoles(server);
+        /*if (user.isBotOwner())
+            return true;*/
+        return userRoles.stream().anyMatch(role -> role.getName().toLowerCase().contains("moderator"));
+    }
+
+    /**
      * Turns a string into a duration
      * @param input the string to convert
      * @return a duration with the specified length
@@ -78,7 +91,6 @@ public class Helper {
         //proper ISO time start
         if (!output.startsWith("P"))
             output = "P" + output;
-
 
         //purge spaces
         while (output.contains(" "))

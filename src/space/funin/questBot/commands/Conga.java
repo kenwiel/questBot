@@ -1,9 +1,11 @@
 package space.funin.questBot.commands;
 
 import de.btobastian.javacord.entities.Server;
+import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
+import space.funin.questBot.Helper;
 
 import java.util.concurrent.ExecutionException;
 
@@ -16,9 +18,13 @@ public class Conga  implements CommandExecutor {
     private static String bottomMiddle = "<a:congaparrot:394098379233296384>";
     private static String bottomRight = "<a:congaparrot:394097280292093953>";
 
+    private static final String DESCRIPTION = "Prints two lines of congaparrots";
+    private static final String USAGE = "!!conga";
+
     @Command(aliases = {"conga"}, async = true)
-    public void onCall(ServerTextChannel channel) {
-        System.out.println("entered conga line");
+    public void onCall(User user, ServerTextChannel channel, Server server) {
+        if (!Helper.isModerator(user, server))
+            return;
         try {
             channel.sendMessage(topLeft + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topMiddle + topRight).get();
             channel.sendMessage(bottomLeft + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomMiddle + bottomRight).get();
