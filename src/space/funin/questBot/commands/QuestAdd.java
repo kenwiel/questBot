@@ -25,13 +25,13 @@ public class QuestAdd implements CommandExecutor {
             "!!addQuest --name `name` --author `@user` --role `@role` --archive `archive` --description `description` --searchstring `searchstring`\n"+
             "__Options:__\n"+
             "*Required arguments:*\n```"+
-            "--name         The name of the quest\n"+
-            "--author       The author(s) of the quest\n"+
-            "--role         The role of the quest\n"+
+            "--name <name can have spaces>  The name of the quest\n"+
+            "--author <@user> [@user...]    The author(s) of the quest\n"+
+            "--role <@role>                 The role of the quest\n"+
             "```*Optional arguments:*\n```"+
-            "--archive      The archive link of the quest\n"+
-            "--description  The description of the quest\n"+
-            "--searchstring The string to search for\n"+
+            "--archive <archive link>       The archive link of the quest\n"+
+            "--description <description>    The description of the quest\n"+
+            "--searchstring <search string> The string to search for; defaults to <name> if not provided\n"+
             "```\n"+
             "Creates or modifies the quest with the given `@role`";
 
