@@ -32,12 +32,12 @@ public class QuestBot {
             return;
         }
 
-        new QuestBot();
+        new QuestBot(args[0]);
 
     }
 
-    public QuestBot() {
-        connect(SettingsHelper.loadToken());
+    public QuestBot(String token) {
+        connect(token);
         setupQst();
     }
 
@@ -66,6 +66,8 @@ public class QuestBot {
                     logger.debug("QuestHandler registered");
 
                     commandHandler.registerCommand(new QuestAdd());
+                    commandHandler.registerCommand(new Join());
+                    commandHandler.registerCommand(new Leave());
                     commandHandler.registerCommand(new Time());
                     commandHandler.registerCommand(new Mute());
                     commandHandler.registerCommand(new BrowseQst());
