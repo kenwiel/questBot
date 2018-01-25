@@ -119,6 +119,11 @@ public class Helper {
         return output;
     }
 
+    /**
+     * Replaces HTML character with discord markdown
+     * @param input the HTML input to work on
+     * @return the HTML formatted to markdown
+     */
     public static String replaceHtmlWithMarkdown(String input) {
         Remark remark = new Remark();
         String output = remark.convertFragment(input);
@@ -127,5 +132,25 @@ public class Helper {
         output = output.replaceAll("\\h{2,}", " ");
 
         return output;
+    }
+
+    /**
+     * Pads a string with spaces to be left aligned and n characters long
+     * @param s the string to pad
+     * @param n the amount of characters its supposed to be long
+     * @return the padded string
+     */
+    public static String padRight(String s, int n) {
+        return String.format("%1$-" + n + "s", s);
+    }
+
+    /**
+     * Pads a string with spaces to be right aligned and n characters long
+     * @param s the string to pad
+     * @param n the amount of characters its supposed to be long
+     * @return the padded string
+     */
+    public static String padLeft(String s, int n) {
+        return String.format("%1$" + n + "s", s);
     }
 }

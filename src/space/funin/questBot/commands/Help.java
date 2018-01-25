@@ -4,6 +4,7 @@ import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
 import de.btobastian.sdcf4j.CommandHandler;
+import space.funin.questBot.Helper;
 
 import java.util.Arrays;
 
@@ -53,7 +54,7 @@ public class Help  implements CommandExecutor{
             if (command.getCommandAnnotation().usage().equals(""))
                 continue;
 
-            sb.append(command.getCommandAnnotation().aliases()[0]).append(" | ").append(command.getCommandAnnotation().description()).append("\n");
+            sb.append(Helper.padLeft(command.getCommandAnnotation().aliases()[0], 15)).append(" | ").append(command.getCommandAnnotation().description()).append("\n");
         }
         sb.append("```");
 
