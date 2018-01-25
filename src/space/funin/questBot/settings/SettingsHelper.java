@@ -72,14 +72,4 @@ public class SettingsHelper {
         }
         return true;
     }
-
-    public static String loadToken() {
-        File tokenFile = new File("./settings/token");
-        if (tokenFile.exists()) {
-            Optional<String> token = readFile(tokenFile.toPath(), null);
-            if (token.isPresent())
-                return token.get();
-        }
-        return null;
-    }
 }
