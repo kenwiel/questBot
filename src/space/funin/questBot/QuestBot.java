@@ -19,8 +19,7 @@ import java.util.Collection;
 public class QuestBot {
     private static final Logger logger = LoggerUtil.getLogger(QuestBot.class);
 
-    private static TimingHandler timingHandler = new TimingHandler();
-    private static Collection<Server> servers;
+    private static TimingHandler timingHandler;
     private static Board.specBoard qst;
     private static DiscordApi api;
     private static QuestHandler questHandler;
@@ -37,12 +36,13 @@ public class QuestBot {
     }
 
     public QuestBot(String token) {
+        timingHandler = new TimingHandler();
         connect(token);
-        setupQst();
     }
 
     private void setupQst() {
-        qst = new Board.specBoard("qst");
+        Board.specBoard qstTemp = new Board.specBoard("qst");
+        setQst(qstTemp);
         timingHandler.scheduleCacheUpdate();
     }
 
@@ -55,7 +55,6 @@ public class QuestBot {
                         return;
                     }
                     QuestBot.api = api;
-                    servers = api.getServers();
 
                     //Login successful
 
@@ -78,6 +77,9 @@ public class QuestBot {
 
                     settingLoader = new SettingLoader(questHandler);
                     logger.debug("Settings loaded");
+
+                    setupQst();
+                    logger.debug("Starting /qst/ updater");
                 });
     }
 
@@ -86,14 +88,14 @@ public class QuestBot {
     }
 
     public static Collection<Server> getServers() {
-        return servers;
+        return api.getServers();
     }
 
-    public static Board.specBoard getQst() {
+    public synchronized static Board.specBoard getQst() {
         return qst;
     }
 
-    public static void setQst(Board.specBoard updatedQst) {
+    public synchronized static void setQst(Board.specBoard updatedQst) {
         qst = updatedQst;
     }
 
