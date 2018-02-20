@@ -61,6 +61,9 @@ public class QuestBot {
                     commandHandler = new JavacordHandler(api);
                     commandHandler.setDefaultPrefix("!!");
 
+                    setupQst();
+                    logger.debug("Starting /qst/ updater");
+
                     questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
                     logger.debug("QuestHandler registered");
 
@@ -78,8 +81,6 @@ public class QuestBot {
                     settingLoader = new SettingLoader(questHandler);
                     logger.debug("Settings loaded");
 
-                    setupQst();
-                    logger.debug("Starting /qst/ updater");
                 });
     }
 
