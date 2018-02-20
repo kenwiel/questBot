@@ -39,7 +39,8 @@ public class QuestHandler {
 
             mentionedRoles.forEach(roleId -> {
                 questList.get(server.getId()).stream().filter(quest -> quest.getRole().getId() == roleId).forEach(quest -> {
-                    QuestHelper.linkThread(quest, channel);
+                    if (quest != null)
+                        QuestHelper.linkThread(quest, channel);
                 });
             });
 
