@@ -38,8 +38,6 @@ public class QuestAdd implements CommandExecutor {
     @Command(aliases = {"addQuest"},description = DESCRIPTION, usage = USAGE, async = true)
     @SuppressWarnings("unchecked")
     public void onCall(Message message, ServerTextChannel channel) {
-        System.out.println("in");
-
         //remove command from input
         String input = message.getContent().replaceFirst("../addquest/i", "");
         Map<QuestProperty, Object> mapping = QuestHelper.parseQuestString(input, message);
