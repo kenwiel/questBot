@@ -26,7 +26,6 @@ public class TimingHandler {
     }
 
     public void scheduleCacheUpdate() {
-        Helper.notifyDeveloper("Starting /qst/ updates.");
         executor.scheduleAtFixedRate(new UpdateCache(), 0, 15, TimeUnit.SECONDS);
     }
 

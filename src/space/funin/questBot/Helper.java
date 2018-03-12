@@ -155,27 +155,4 @@ public class Helper {
     public static String padLeft(String s, int n) {
         return String.format("%1$" + n + "s", s);
     }
-
-    /**
-     * Sends a message to the developer (@kenwiel, userID 156879547214725120L) with a throwables stacktrace
-     * @param t the throwable
-     */
-    public static void notifyDeveloper(Throwable t) {
-        StringWriter sw = new StringWriter();
-        PrintWriter pw = new PrintWriter(sw);
-        t.printStackTrace(pw);
-
-        QuestBot.getApi().getUserById(156879547214725120L).ifPresent(user ->
-            user.sendMessage("```" + sw.toString() + "```"));
-    }
-
-    /**
-     * Sends a message to the developer (@kenwiel, userID 156879547214725120L)
-     * @param message the message
-     */
-    public static void notifyDeveloper(String message) {
-
-        QuestBot.getApi().getUserById(156879547214725120L).ifPresent(user ->
-                user.sendMessage("```" + message + "```"));
-    }
 }
