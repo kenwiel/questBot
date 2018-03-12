@@ -3,6 +3,7 @@ package space.funin.questBot.commands;
 import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.javacord.entities.message.Message;
+import de.btobastian.javacord.entities.message.MessageAuthor;
 import de.btobastian.javacord.entities.message.embed.EmbedBuilder;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
@@ -66,7 +67,7 @@ public class BrowseQst implements CommandExecutor {
         EmbedBuilder eb = new EmbedBuilder();
         String name = post.getPosterName() + " (ID: " + post.getPosterID() + ")";
 
-        eb.setAuthor(name, post.url(), null);
+        eb.setAuthor(name, post.url(), "");
         if(post.hasFile())
             eb.setThumbnail(post.getFile().url());
         eb.setTitle(post.subject());

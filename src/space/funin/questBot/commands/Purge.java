@@ -4,18 +4,9 @@ import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
 import de.btobastian.javacord.entities.channels.ServerTextChannel;
 import de.btobastian.javacord.entities.message.Message;
-import de.btobastian.javacord.entities.message.MessageHistory;
-import de.btobastian.javacord.entities.permissions.Role;
 import de.btobastian.sdcf4j.Command;
 import de.btobastian.sdcf4j.CommandExecutor;
-import space.funin.questBot.Exceptions.RoleAlreadyPresentException;
 import space.funin.questBot.Helper;
-import space.funin.questBot.QuestBot;
-
-import java.time.Duration;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletionException;
 
 public class Purge implements CommandExecutor {
@@ -39,7 +30,7 @@ public class Purge implements CommandExecutor {
             if (amount > 100)
                 amount = 100;
             try {
-                channel.bulkDelete(channel.getHistoryBefore(amount, message.getId()).join().getMessages()).join();
+                channel.getMessages(amount).join().tailSet(message).deleteAll();
                 channel.sendMessage("Deleted " + amount + " messages.");
             } catch (CompletionException e) {
                 channel.sendMessage("Unable to bulkdelete messages older than 14 days.");

@@ -71,7 +71,7 @@ public class Quest {
     }
 
     public List<User> getAuthors() {
-        return authorIds.stream().map(id -> QuestBot.getApi().getUserById(id)).filter(Optional::isPresent).map(Optional::get).collect(Collectors.toList());
+        return authorIds.stream().map(id -> QuestBot.getApi().getUserById(id).join()).collect(Collectors.toList());
     }
 
     public void setAuthors(List<User> authors) {

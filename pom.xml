@@ -56,13 +56,8 @@
         <dependency>
             <groupId>de.btobastian</groupId>
             <artifactId>Javacord</artifactId>
-            <version>de21543</version>
-        </dependency> <!--
-        <dependency>
-            <groupId>com.github.GamingAndStuffs</groupId>
-            <artifactId>Javacord</artifactId>
-            <version>94d2cc2321</version>
-        </dependency>-->
+            <version>7a0260e</version>
+        </dependency>
         <dependency>
             <groupId>com.github.BtoBastian</groupId>
             <artifactId>sdcf4j</artifactId>

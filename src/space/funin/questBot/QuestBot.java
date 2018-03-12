@@ -4,6 +4,9 @@ import de.btobastian.javacord.AccountType;
 import de.btobastian.javacord.DiscordApi;
 import de.btobastian.javacord.DiscordApiBuilder;
 import de.btobastian.javacord.entities.Server;
+import de.btobastian.javacord.entities.message.Message;
+import de.btobastian.javacord.events.message.MessageCreateEvent;
+import de.btobastian.javacord.listeners.message.MessageCreateListener;
 import de.btobastian.javacord.utils.logging.LoggerUtil;
 import de.btobastian.sdcf4j.CommandHandler;
 import de.btobastian.sdcf4j.handler.JavacordHandler;
@@ -58,12 +61,13 @@ public class QuestBot {
                     servers = api.getServers();
 
                     //Login successful
-
                     commandHandler = new JavacordHandler(api);
                     commandHandler.setDefaultPrefix("!!");
 
                     questHandler = new QuestHandler(api, commandHandler.getDefaultPrefix());
                     logger.debug("QuestHandler registered");
+
+                    api.addMessageCreateListener(new Say());
 
                     commandHandler.registerCommand(new QuestAdd());
                     commandHandler.registerCommand(new Join());

@@ -25,7 +25,7 @@ public class UpdateCache implements Runnable {
             String stackTrace = sw.toString();
 
             //notify the bot owner that its dead
-            QuestBot.getApi().getUserById(156879547214725120L).ifPresent(u -> u.sendMessage("Exception Thrown while updating cache:```" + stackTrace + "```"));
+            QuestBot.getApi().getTextChannelById(422883413410840596L).ifPresent(u -> u.sendMessage("Exception Thrown while updating cache:```" + stackTrace + "```"));
         }
     }
 }
