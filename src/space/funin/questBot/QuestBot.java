@@ -70,9 +70,11 @@ public class QuestBot {
                     commandHandler.registerCommand(new Leave());
                     commandHandler.registerCommand(new Time());
                     commandHandler.registerCommand(new Mute());
+                    commandHandler.registerCommand(new Purge());
                     commandHandler.registerCommand(new BrowseQst());
                     commandHandler.registerCommand(new Conga());
                     commandHandler.registerCommand(new OutputQuest(questHandler));
+                    commandHandler.registerCommand(new QuestRoles());
                     commandHandler.registerCommand(new Help(commandHandler));
                     logger.debug("Commands registered");
 
@@ -89,11 +91,11 @@ public class QuestBot {
         return servers;
     }
 
-    public static Board.specBoard getQst() {
+    public static synchronized Board.specBoard getQst() {
         return qst;
     }
 
-    public static void setQst(Board.specBoard updatedQst) {
+    public static synchronized void setQst(Board.specBoard updatedQst) {
         qst = updatedQst;
     }
 
