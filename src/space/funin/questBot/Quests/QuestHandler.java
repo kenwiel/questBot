@@ -24,11 +24,18 @@ public class QuestHandler {
     }
 
     private  void handleMessageCreate(MessageCreateEvent event) {
-        User user = event.getMessage().getAuthor().asUser().get();
         Message message = event.getMessage();
-        ServerTextChannel channel = event.getChannel().asServerTextChannel().get();
-        Server server = event.getServer().get();
-
+        User user;
+        ServerTextChannel channel;
+        Server server;
+        try {
+            user = event.getMessage().getAuthor().asUser().get();
+            channel = event.getChannel().asServerTextChannel().get();
+            server = event.getServer().get();
+        } catch (NoSuchElementException ignored) {
+            //if any of these dont exist, theyre from a private message. Can't mention roles in there anyways, so ¯\_(ツ)_/¯
+            return;
+        }
         if (user.isBot())
             return;
 
@@ -39,7 +46,8 @@ public class QuestHandler {
 
             mentionedRoles.forEach(roleId -> {
                 questList.get(server.getId()).stream().filter(quest -> quest.getRole().getId() == roleId).forEach(quest -> {
-                    QuestHelper.linkThread(quest, channel);
+                    if (quest != null)
+                        QuestHelper.linkThread(quest, channel);
                 });
             });
 
