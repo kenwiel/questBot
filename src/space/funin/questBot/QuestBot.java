@@ -57,7 +57,6 @@ public class QuestBot {
                         return;
                     }
                     QuestBot.api = api;
-                    servers = api.getServers();
 
                     //Login successful
                     commandHandler = new JavacordHandler(api);
