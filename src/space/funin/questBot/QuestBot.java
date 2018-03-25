@@ -23,7 +23,6 @@ public class QuestBot {
     private static final Logger logger = LoggerUtil.getLogger(QuestBot.class);
 
     private static TimingHandler timingHandler = new TimingHandler();
-    private static Collection<Server> servers;
     private static Board.specBoard qst;
     private static DiscordApi api;
     private static QuestHandler questHandler;
@@ -68,6 +67,7 @@ public class QuestBot {
                     logger.debug("QuestHandler registered");
 
                     api.addMessageCreateListener(new Say());
+                    api.addMessageCreateListener(new RestartCache());
 
                     commandHandler.registerCommand(new QuestAdd());
                     commandHandler.registerCommand(new Join());
@@ -89,10 +89,6 @@ public class QuestBot {
 
     public static TimingHandler getTimingHandler() {
         return timingHandler;
-    }
-
-    public static Collection<Server> getServers() {
-        return servers;
     }
 
     public static synchronized Board.specBoard getQst() {

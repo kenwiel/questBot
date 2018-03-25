@@ -24,6 +24,7 @@ public class UpdateCache implements Runnable {
             e.printStackTrace(pw);
             String stackTrace = sw.toString();
 
+            logger.debug("/qst/ update failed.", e);
             //notify the bot owner that its dead
             QuestBot.getApi().getTextChannelById(422883413410840596L).ifPresent(u -> u.sendMessage("Exception Thrown while updating cache:```" + stackTrace + "```"));
         }

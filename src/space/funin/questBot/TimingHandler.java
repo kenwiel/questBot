@@ -2,6 +2,7 @@ package space.funin.questBot;
 
 import de.btobastian.javacord.entities.Server;
 import de.btobastian.javacord.entities.User;
+import javafx.concurrent.ScheduledService;
 import space.funin.questBot.Runnables.CleanMap;
 import space.funin.questBot.Runnables.UnMute;
 import space.funin.questBot.Runnables.UpdateCache;
@@ -16,6 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class TimingHandler {
     private ScheduledThreadPoolExecutor executor;
     private Map<Server, Map<User, ScheduledFuture>> unMuteMap = new HashMap<>();
+    private static ScheduledFuture updater;
 
     public TimingHandler() {
         executor = new ScheduledThreadPoolExecutor(5);
@@ -26,7 +28,9 @@ public class TimingHandler {
     }
 
     public void scheduleCacheUpdate() {
-        executor.scheduleAtFixedRate(new UpdateCache(), 0, 15, TimeUnit.SECONDS);
+        if (updater != null)
+            updater.cancel(true);
+        updater = executor.scheduleAtFixedRate(new UpdateCache(), 0, 60, TimeUnit.SECONDS);
     }
 
     public void scheduleUnmute(Server server, User user, Duration duration) {

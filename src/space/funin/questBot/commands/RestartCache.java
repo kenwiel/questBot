@@ -5,7 +5,7 @@ import de.btobastian.javacord.events.message.MessageCreateEvent;
 import de.btobastian.javacord.listeners.message.MessageCreateListener;
 import space.funin.questBot.QuestBot;
 
-public class Say implements MessageCreateListener {
+public class RestartCache implements MessageCreateListener {
     @Override
     public void onMessageCreate(MessageCreateEvent messageCreateEvent) {
         //Bot owner only
@@ -13,15 +13,8 @@ public class Say implements MessageCreateListener {
             Message message = messageCreateEvent.getMessage();
             String[] commands = message.getContent().split(" ");
             String command = commands[0];
-            if (command.equals("say")) {
-                String channelId = commands[1];
-
-                String content = message.getContent().replace(commands[0], "").replace("" + channelId, "").trim();
-                QuestBot.getApi().getTextChannelById(channelId).ifPresent(textChannel -> {
-                    textChannel.asServerTextChannel().ifPresent(serverTextChannel -> {
-                        serverTextChannel.sendMessage(content);
-                    });
-                });
+            if (command.equals("cache")) {
+                QuestBot.getTimingHandler().scheduleCacheUpdate();
             }
         }
     }
