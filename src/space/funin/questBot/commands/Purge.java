@@ -20,7 +20,7 @@ public class Purge implements CommandExecutor {
             "Purges between 2 and 100 messages from the current channel.";
 
     @Command(aliases = {"purge"}, description = DESCRIPTION, usage = USAGE, privateMessages = false, async = true)
-    public void onMute(User user, Server server, Message message, ServerTextChannel channel) {
+    public void onPurge(User user, Server server, Message message, ServerTextChannel channel) {
         if (!Helper.isModerator(user, server))
             return;
 
@@ -30,7 +30,7 @@ public class Purge implements CommandExecutor {
             if (amount > 100)
                 amount = 100;
             try {
-                channel.getMessages(amount).join().tailSet(message).deleteAll();
+                channel.getMessages(amount).join().deleteAll();
                 channel.sendMessage("Deleted " + amount + " messages.");
             } catch (CompletionException e) {
                 channel.sendMessage("Unable to bulkdelete messages older than 14 days.");
