@@ -18,15 +18,12 @@ public class UpdateCache implements Runnable {
             qstUpdate.refreshCache();
             QuestBot.setQst(qstUpdate);
             logger.info("/qst/ cache updated. " + qstUpdate.cache.size() + " threads in cache.");
-        } catch (Exception e) {
-            StringWriter sw = new StringWriter();
-            PrintWriter pw = new PrintWriter(sw);
-            e.printStackTrace(pw);
-            String stackTrace = sw.toString();
 
+            //logging in owner-only server so I dont have to ssh in to see how the bot is doing
+            QuestBot.getApi().getTextChannelById(422883413410840596L).ifPresent(u -> u.sendMessage("/qst/ cache updated. `" + qstUpdate.cache.size() + "` threads in cache."));
+        } catch (Exception e) {
             logger.debug("/qst/ update failed.", e);
-            //notify the bot owner that its dead
-            QuestBot.getApi().getTextChannelById(422883413410840596L).ifPresent(u -> u.sendMessage("Exception Thrown while updating cache:```" + stackTrace + "```"));
+            QuestBot.getApi().getTextChannelById(422883413410840596L).ifPresent(u -> u.sendMessage("Exception Thrown while updating cache:`" + e.getCause() +"`"));
         }
     }
 }
